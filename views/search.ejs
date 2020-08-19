@@ -1,0 +1,43 @@
+<%- include('../partials/header.ejs')-%>
+<%- include('../partials/navbar.ejs')-%>
+
+<div class="container-fluid">
+
+    <div class="row  ">
+        
+        
+    </form>
+        <div class="row col-10 p-3 mb-2 ">
+           <%for (let i = 0; i < result.length; i++){%>
+        <div class="col-3 p-4 mb-3">
+            <div class="product-grid5 list-group">
+                <div class="product-grid5">
+                    <div class="product-image5">
+                        <a href="home/product-single/<%= result[i].title.trim().replace(/ /g, '_')%>/<%= result[i].id%>">
+                            <img class="pic-1" src="<%= result[i].imgs[0]%>" alt="img">
+                            <img class="pic-2" src="<%= result[i].imgs[1]%>" alt="img">
+                        </a>
+                        <ul class="social">
+                            <li class="text-white"><%= result[i].preis%> E</li>
+                            <!-- <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li> -->
+                        </ul>
+                        <a href="home/product-single/<%= result[i].title.trim().replace(/ /g, '_')%>/<%= result[i].id%>" class="select-options"><i class="fa fa-arrow-right"></i> Siehe Einzelheiten</a>
+                    </div>
+                    <div class="product-content">
+                        
+                        <h3 class="title text-white"><a href="home/product-single/<%= result[i].title.trim().replace(/ /g, '_')%>/<%= result[i].id%>"><%= result[i].title%></a></h3>
+                        
+                        <p class="par text-white"><%= result[i].state%></p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%}%>
+        </div>
+    </div>    
+</div>                                 
+
+<%- include('../partials/footer.ejs')-%>
+ 

@@ -1,0 +1,180 @@
+<%- include('../partials/header.ejs')-%>
+<%- include('../partials/navbar.ejs')-%>
+
+
+  
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 100%}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content ">
+    <div class="col-sm-2 sidenav p-3 mb-2 bg-dark text-white  ">
+      
+      
+      
+
+      <div id="list-example" class="list-group ">
+       
+        <h6>Der Name</h6>
+        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-1"><h6><%= sm.fname%> <%= sm.lname%> </h6></a>
+        <h6>email</h6>
+        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-2"><%= sm.email%></a>
+        <h6>Aktiv seit</h6>
+        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-3"><span class="badge badge-secondary"><%= sm.date%></span></a>
+        <h6>Einstellungen</h6>
+        <button type="button" class="btn btn-danger"><a class=" text-white" href="/admin/edit-data">  Daten geändert</a></button>
+      </div>
+     
+      
+    </div>
+
+    <div class="col-sm-9">
+        <h2 class="text-white mt-auto p-3 d-flex justify-content-center">Willkommen <%= sm.fname%> <%= sm.lname%> auf Ihrer persönlichen Seite</h2>
+        <div class="col-sm-6 ">
+            <h3><span class="badge badge-dark"><a href="/admin/addProduct" class="badge badge-dark"><svg width="3em" height="2em" viewBox="0 0 16 16" class="bi bi-images" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M12.002 4h-10a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-10-1a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-10z"/>
+                <path d="M10.648 8.646a.5.5 0 0 1 .577-.093l1.777 1.947V14h-12v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
+                <path fill-rule="evenodd" d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z"/>
+              </svg> Fügen Sie einen neuen Artikel hinzu</a></span></h3>    
+        </div>
+        <hr>
+        <section class="static about-sec">
+          <div class="container">
+              
+              <h2 class="text-white">Deine Produkte</h2>
+              <div class="recent-book-sec">
+                <% if(products.length==0){%>
+                  <h4> SIe haben keine Product</h4>
+                  <%} else{%>
+                  <div class="row">
+                      <%for (let i = 0; i < products.length; i++){%>
+                      <div class="col-md-3">
+                          <div class="product-image">
+                            <span class="preis"> <%= products[i].preis%> E</span>
+                            <a href="/admin/product/<%=products[i].id%>">
+                              <img  class="productimage" src="<%= products[i].imgs[0]%>" alt="img"> </a>
+                              <h4><a class="text-white" href="/admin/product/<%=products[i].id%>"><%= products[i].title%></a></h4>
+                              <p class="text-white">Wenn Sie das Produkt ändern möchten, klicken Sie auf Edit</p>
+                              <p class="text-white">Wenn Sie das Produkt löschen möchten, klicken Sie auf Delete</p>
+                              <button type="button" class="btn btn-success"><a class="text-white" href="/admin/product/<%=products[i].id%>">Edit</a></button>
+                              <button type="button" class="btn btn-danger"><a class="showDeleteModalBtn text-white" productid="<%=products[i].id%>" href="#">Delete</a></button>
+                              <h6>&nbsp;&nbsp;&nbsp;</h6>
+                          </div>
+                      </div>
+                      <%}%>
+                  </div>
+                  <%}%>
+                  
+              </div>
+          </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteConfirmModal">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header bg-danger">
+              <h5 class="modal-title">Are you sure?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p>This product and its related files gonna be deleted and there is no way to bring them back..!</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" style="background-color: red;" id="deleteproductbtn">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="resultModal">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p>Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+</body>
+</html>
+<%- include('../partials/footer.ejs')-%>
+<script>
+  let productid;
+        document.querySelectorAll('.showDeleteModalBtn').forEach(btn => {
+            btn.addEventListener('click', e => {
+            e.preventDefault()
+            $('#deleteConfirmModal').modal('show')
+            productid = e.target.getAttribute('productid')
+        })
+        })
+        document.querySelector('#deleteproductbtn').addEventListener('click', e => {
+            e.preventDefault()
+            fetch('/admin/deleteproduct', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({productid})
+            }).then(response => {
+                // hide the delete confermation modal
+                $('#deleteConfirmModal').modal('hide')
+                if (response.status == 200) {
+                    response.json().then(data => {
+                      console.log(data);
+                        if(data === 1) {
+                            document.querySelector('a[productid="' + productid + '"]').parentElement.parentElement.parentElement.remove()
+                        } else {
+                            showModal(true, 'Error', 'this product can not be deleted')
+                        }
+                }).catch(error => {
+                    showModal(true, 'Error', 'server error please contact the web admin')
+                })
+                } else {
+                    showModal(true,'Error', 'can not connect to the server')
+                }
+            }).catch(error => {
+                showModal(true,'Error', 'can not connect to the server')
+            })
+        })
+</script>

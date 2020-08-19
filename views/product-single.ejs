@@ -1,0 +1,220 @@
+<%- include('../partials/header.ejs')-%>
+<%- include('../partials/navbar.ejs')-%>
+<div class="container-fluid">
+<section class="product-sec pt-1">
+    
+<div class="container bg-dark text-white p-3">
+    <div class="row   ">
+        
+           
+            <div class="col-md-8 col-lg-8 bg-dark text-white  slider-sec ">
+                <h3 class="  bg-dark text-white  d-flex justify-content-center"><%=product.title%></h3>
+                <!-- main slider carousel -->
+                <div id="myCarousel" class="carousel slide col-sm-12 col-md-12">
+                    <!-- main slider carousel items -->
+                    <div class="col-md-12 carousel-inner">
+                        <%for (let i = 0; i < product.imgs.length; i++){%>
+                        <div class="<%= i == 0 ? 'active' : '' %> item carousel-item" data-slide-number="<%=i%>">
+                            <img src="<%=product.imgs[i]%>" class="img-fluid img1">
+                        </div>
+                        <%}%>
+                        
+                    </div>
+                    <!-- main slider carousel nav controls -->
+                    <ul class="carousel-indicators list-inline">
+                        <%for (let i = 0; i < product.imgs.length; i++){%>
+                        <li class="list-inline-item <%= i == 0 ? 'active' : '' %>">
+                            <a id="carousel-selector-0" class="<%= i == 0 ? 'selected' : '' %>" data-slide-to="<%=i%>" data-target="#myCarousel">
+                            <img src="<%=product.imgs[i]%>" class="img-fluid">
+                        </a>
+                        </li>
+                        <%}%>
+                        
+                    </ul>
+                   
+                </div>
+                
+                <!--/main slider carousel-->
+            </div>
+            <div class="col-md-4 col-lg-4 bg-dark text-white mt-5  pt-5 pr-5" >
+                <div class=" slider-content ">
+                    <div class="card  bg-dark text-white" >
+                        <div class="card-header mt-auto p-2 ">
+                            <h4><i class="fas fa-user mr-5 pl-3 header"></i><%-user.fname%> <%-user.lname%></h4>
+                            
+                        </div  >
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item  bg-dark text-white"><i class="fab fa-creative-commons-sampling header mr-3"> </i><i class=" mr-3">Aktiv seit</i>  <span class="">  <%=new Date(user.date).toLocaleDateString('de-DE')%></span> </li>
+                          <li class="list-group-item  bg-dark text-white"><i class="far fa-envelope header mr-5"></i><%= user.email%></li>
+                          <li class="list-group-item  bg-dark text-white"> <i class="fas fa-phone-alt mr-5 header"> </i> <%= product.telefonnummer%> </li>
+                          <li class="list-group-item  bg-dark text-white ">
+                         <a href="/allProductUser/<%-product.userid%>"><i class="fas fa-globe  mr-5 header"></i> Anzeigen online</a></li>
+                         <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="well well-sm">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </ul>
+                      </div>
+                      <!-- ///////// -->
+                      <div class="d-flex justify-content-center pt-3">
+                    <button type="button" class="btn btn-primary d-flex justify-content-center" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><span class="mt-auto pr-2"><i class="far fa-envelope bigicon"></i></span><h5 class="mt-auto pt-1">Nachricht Schreiben</h5></button>
+                    </div>
+                      
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog ">
+                        <div class="modal-content">
+                          
+                          <div class="modal-header  bg-success">
+                              <h5 class="modal-title " id="exampleModalLabel">Contact the seller</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            
+                          </div>
+                          
+                          <div class="modal-body">
+                                <fieldset disabled>
+                                <div class="form-group mt-auto p-2 d-flex justify-content-center">
+                                    <span class=" "><i class="fas fa-passport bigicon"></i></span>
+                                    <div class="col-md-12">
+                                    <input type="text" id="disabledTextInput"  class="form-control" placeholder="<%=product.id%>">
+                                    </div>
+                                
+                                  </div>
+                                </fieldset>
+                                <div class="form-group mt-auto p-2 d-flex justify-content-center">
+                                        <span class=" "><i class="far fa-envelope bigicon"></i></span>
+                                    <div class="col-md-12">
+                                        <input id="email" name="email" type="text" placeholder="Email Address" class="form-control">
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="form-group">
+                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                                    <div class="col-md-12">
+                                        <input id="phone" name="phone" type="text" placeholder="Phone" class="form-control">
+                                    </div>
+                                </div> -->
+        
+                                <div class="form-group mt-auto p-2 d-flex justify-content-center">
+                                    <span class=""><i class="far fa-comment bigicon"></i></span>
+                                    <div class="col-md-12">
+                                        <textarea class="form-control" id="message" name="message" placeholder="Enter your massage for us here. We will get back to you within 2 business days." rows="7"></textarea>
+                                        
+                                    </div>
+                                </div>
+        
+                               
+                            
+                          </div>
+                          <div id="errorMessage" class="text-danger d-none">please fill the entries </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary btn-lg" id="sendmessageBtn">Submit</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                   
+                </div>
+           </div>
+    </div> 
+    <div class="card  bg-dark text-white col-sm-8" >
+        <dl class="list-group list-group-flush  bg-dark text-white ">
+            
+            <dd class="list-group-item bg-dark"><i class="fas fa-dollar-sign  mr-4 header"></i><i class="mr-5" >Preis</i> <%-product.preis%> <i class="fas fa-euro-sign"></i></dd>
+          
+           
+            <dd class="list-group-item  bg-dark"><i class="fas fa-home mr-3 header"></i><i class="mr-5">Straße</i> <%-product.straße%> </dd>
+          
+            <dd class="list-group-item  bg-dark"><i class="fas fa-map-marked-alt mr-3 header"></i><i class="mr-5">state</i><i class="mr-3"><%-product.state%></i><%-product.zip%> </dd>
+            
+           
+          
+            <dt class="list-group-item  bg-dark"><i class="fas fa-audio-description mr-3 header"></i> Beschreibung</dt>
+            
+            <div class="col-sm-12 col-md-12 d-flex w-100 justify-content-between list-group-item col-sm-8 bg-dark">
+                
+                <p class=" text-white"><%-product.description%></p>
+              </div>
+            <li class="col-sm-12 col-md-8 list-unstyled"></li>
+          </dl>
+        </div>
+        
+</div>
+</section>
+</div>
+
+<%- include('../partials/footer.ejs')-%>
+<script>
+    let plasAttr=''
+                
+    $('.form-control').blur(function () { 
+                    if($(this).val()==''){
+                        $(this).css( 'border-bottom-color', 'salmon')
+                        $(this).next('div').fadeIn()
+                        
+                    }else{
+                        $(this).css( 'border-bottom-color', 'white')
+                        $(this).next('div').fadeOut()
+                        
+                    }
+                });
+    $('#sendmessageBtn').click(e => {
+        e.preventDefault()
+        const idSeller = document.querySelector('#disabledTextInput').placeholder
+        const  emailUser = document.querySelector('#email').value.trim()
+        const messageUser = document.querySelector('#message').value.trim()
+    
+    if (emailUser && messageUser ) {
+        $('#errorMessage').addClass('d-none')
+        const sentObj = {
+            idSeller,
+            emailUser,
+            messageUser
+        }
+      
+        fetch('/product',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sentObj)
+        }).then(response => {
+            if(response.status == 200) {
+                response.json().then(data => {
+                   // console.log(data)
+                   if (data === 1) {
+        document.querySelector('#email').value=''
+        document.querySelector('#message').value=''
+        $('#exampleModal').modal('hide')
+        setTimeout(() => {
+            alert('message  has been sent successfuly')
+        }, 100);
+        
+                   } else {
+                       
+                    alert('message  has NOT been sent')
+
+                   }
+                    
+                }).catch(error => {
+                    console.log(error);
+                   
+                })
+            }
+        }).catch(error => {
+            console.log(error)
+            
+        })
+    } else {
+        $('#errorMessage').removeClass('d-none')
+    }
+    })
+</script>

@@ -1,0 +1,93 @@
+<%- include('../partials/header.ejs')-%>
+<%- include('../partials/navbar.ejs')-%>
+<div class="container">
+<div class="row">
+	<div class="col-md-6">
+		<form >
+			<h2><strong for="colFormLabel  " class="col-sm-2 col-form-label text-white p-5 m-5"></h2>
+              <h3 class="m-5"> Passwort vergessen</h3>  
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" name="email" autofocus class="form-control" id="emaiLogen">
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary" id="loginBtn" value="Reset Password" >
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- ////modul -->
+<div class="modal" tabindex="-1" role="dialog" id="resultModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include('../partials/footer.ejs')-%>
+<script>
+    document.querySelector('#loginBtn').addEventListener('click', e => {
+    e.preventDefault()
+    const email = document.querySelector('#emaiLogen').value.trim()
+   
+    
+    if (email  ) {
+       
+        const sentObj = {
+            email
+        }
+        // send data using fetch
+        fetch('/forgot',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sentObj)
+        }).then(response => {
+            if(response.status == 200) {
+                response.json().then(data => {
+                    console.log(data)
+                    switch (data) {
+                        case 1:
+                            window.location = '/login'
+                            break;
+                        case 2:
+                        showModal(true, "missing ertries", "you miss some entries ")
+                            break;
+                        case 3:
+                            showModal(true, "Email Error", "Either the email not exsist")
+                            break;
+                        case 4:
+                            showModal(true, "Server Error", "Something unexpected happened. please contact the system Adminstrator")
+                            break;
+                    
+                        default:
+                            showModal(true, "Server Error", "Something unexpected happened. please contact the system Adminstrator")
+                            break;
+                    }
+                }).catch(error => {
+                    console.log(error);
+                    showModal(true, "error on getting data", 'please contact the Administrator')
+                })
+            }
+        }).catch(error => {
+            console.log(error)
+            showModal(true, "server side error", error.message)
+        })
+    } else {
+        showModal(true, "missing ertries", "you miss some entries ")
+    }
+})
+</script>

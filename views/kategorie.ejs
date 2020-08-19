@@ -1,0 +1,77 @@
+<%- include('../partials/header.ejs')-%>
+<%- include('../partials/navbar.ejs')-%>
+
+<div class="container-fluid">
+
+    <div class="row  ">
+        
+        <div class="col-sm-2 sidenav p-3 mb-2 bg-dark text-white ">
+           
+            <form action="/home" method="POST">
+            <h4>John's Blog</h4>
+            <div id="list-example" class="list-group ">
+                <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="/home">All Kategorien</a>
+                <%for (let i = 0; i < kategorie.length; i++){%>
+                
+                <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="/home/<%= kategorie[i].kategorie%>"><%= kategorie[i].kategorie%></a>
+                <%}%>
+               
+            </div>  
+        </div>
+    </form>
+   
+        <div class="row col-10 p-3 mb-2 ">
+            <%for (let i = 0; i < kategorie.length; i++){%>
+        <div class="col-3 p-4 mb-3">
+            <div class="product-grid5 list-group">
+                <div class="product-grid5">
+                    <div class="product-image5">
+                        <a href="product-single/<%= kategorie[i].title.trim().replace(/ /g, '_')%>/<%= kategorie[i].id%>">
+                            <img class="pic-1" src="<%= kategorie[i].imgs[0]%>" alt="img">
+                            <img class="pic-2" src="<%= kategorie[i].imgs[1]%>" alt="img">
+                        </a>
+                        <ul class="social">
+                            <li class="text-white"><%= kategorie[i].preis%> E</li>
+                            <!-- <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li> -->
+                        </ul>
+                        <a href="product-single/<%= kategorie[i].title.trim().replace(/ /g, '_')%>/<%= kategorie[i].id%>" class="select-options"><i class="fa fa-arrow-right"></i> Siehe Einzelheiten</a>
+                    </div>
+                    <div class="product-content">
+                        
+                        <h3 class="title text-white"><a href="product-single/<%= kategorie[i].title.trim().replace(/ /g, '_')%>/<%= kategorie[i].id%>"><%= kategorie[i].title%></a></h3>
+                        
+                        <p class="par text-white"><%= kategorie[i].state%></p>
+                        <p class="par text-white"><%= kategorie[i].straße%><%= kategorie[i].zip%>  </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%}%>
+        </div>
+    </div>    
+</div>                                 
+<!-- app.get('/home',(req,res)=>{
+    let kategori=req.query.kategorie
+    if (kategori&&kategori !=='all' ) {
+       db.getKategorien(req.params.kategorie).then(kategorie => {
+           res.render('home', {kategorie})
+           console.log(kategorie);
+       })
+    } else {
+       db.getAllProducts().then(allproduct => {
+           res.render('home', {allproduct})
+       })
+    }
+   
+})
+<option class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" selected>Open this select menu</option>
+<option class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" value="all">all</option>
+<option class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" value="auto">auto</option>
+<option class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" value="haus">haus</option>
+<option class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" value="tisch">tisch</option>
+</select>
+<button class="btn btn-primary" value="filter" type="submit">filter </button> -->
+<%- include('../partials/footer.ejs')-%>
+ 

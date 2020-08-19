@@ -1,0 +1,254 @@
+<%- include('../partials/header.ejs')-%>
+<%- include('../partials/navbar.ejs')-%>
+
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content ">
+    <div class="col-sm-3 sidenav p-3 mb-2 bg-dark text-white contentbox ">
+        <h4>John's Blog</h4>
+        <div id="list-example" class="list-group ">
+            <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-1">Item 1</a>
+            <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-2">Item 2</a>
+            <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-3">Item 3</a>
+            <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-4">Item 4</a>
+        </div>  
+    </div>
+
+    <div class="col-sm-9">
+            <h3 class=" text-white mt-auto p-2 d-flex justify-content-center">Willkommen auf Ihrer persönlichen Seite</h3>
+            <hr>
+            <!-- Anzeigentyp         -->
+      <div class="form"> 
+              <form>         
+          <div class="d-flex flex-nowrap ">
+              <div class="order-0 p-2">
+                <strong class="mr-md-5 formgroup-label-mandatory text-white justify-content-start " for=""> Anzeigentyp   &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</strong>
+              </div>
+              <div class="mr-md-3 order-3 p-2 text-white custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline1">Ich biete</label>
+              </div>
+              <div class="order-3 p-2 text-white custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline2">Ich suche</label>
+              </div>
+          </div> 
+                <!-- Titel der Anzeige -->
+          <div class="form-group row">
+            <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white">Titel der Anzeige</strong>
+            <div class="col-sm-6">
+              <input type="email" class="form-control" id="TitleInp" placeholder="Titel">
+            </div>
+          </div>  
+                 <!-- Bilder      -->
+          <div class="form-group row">
+            <strong for="colFormLabel  " class="col-sm-2 mr-md-3 col-form-label text-white">Fotos hochladen &nbsp; </strong>
+               
+             <div class="custom-file mt-2 col-sm-6">
+              <label for="exampleFormControlFile1">Fotos hochladen</label>
+              <input type="file" class="form-control-file" multiple id="imgsInp"
+                  accept="image/x-png,image/gif,image/jpeg">
+                 
+             </div>
+          </div>
+              <!-- Beschreibung -->
+          <div class="form-group row">
+                <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white">Beschreibung</strong>
+            <div class="custom-file mt-2 col-sm-6">
+              <textarea class="form-control " id="descriptionInp"></textarea>
+            </div>
+          </div>
+          <br>
+                  <!-- preis -->
+          <div class="d-flex flex-nowrap ">
+            <div class="order-0 p-2 mr-md-5">
+              <strong class="mr-md-5 formgroup-label-mandatory text-white justify-content-start " for=""> Preis &nbsp;  </strong>
+            </div>
+            <div class="col-md-2 mb-2">
+              <input type="text" class="form-control " id="preisInp" required>
+              
+            </div>
+            <div class="order-0 p-2">
+              <strong class="mr-md-4 formgroup-label-mandatory text-white justify-content-start " for=""> EUR </strong>
+            </div>
+            <div class="mr-md-5 order-3 p-2 text-white custom-control custom-radio custom-control-inline">
+              <input type="radio" id="festpreisInp" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label"  for="festpreisInp">Festpreis</label>
+            </div>
+            <div class="order-3 p-2 text-white custom-control custom-radio custom-control-inline">
+              <input type="radio" id="verschenken" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label" for="verschenken">Zu verschenken</label>
+            </div>
+        </div> 
+        <hr>
+          <div class="form-group row">
+          <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white"> Kategorie</strong>
+          <select class="custom-select col-sm-6 mt-2" id="Kategorie" >
+            <option selected>Wählen Kategorie</option>
+            <option value="Haushaltsgegenstände"> Haus & Garten</option>
+            <option value="Kleider">Mode & Beauty</option>
+            <option value="Elektronik">Elektronik</option>
+            <option value="Auto, Rad">Auto, Rad </option>
+            <option value="Auto, Rad">Unterricht & Kurse </option>
+            <option value="Auto, Rad">Jobs </option>
+            <option value="Auto, Rad">Haustiere </option>
+            <option value="Auto, Rad">Familie, Kind </option>
+            <option value="Auto, Rad">Immobilien </option>
+            <option value="Auto, Rad">Verschenken & Tauschen</option>
+          </select>
+        </div> 
+               <!-- Name -->
+        <div class="form-group row">
+          <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white">Name</strong>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="nameInp" placeholder="Name">
+          </div>
+        </div>
+        <!-- Telefonnummer   -->
+        <div class="form-group row">
+          <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white">Telefonnummer</strong>
+          <div class="col-sm-6">
+            <input type="number" class="form-control" id="telefonnummer" placeholder="Telefonnummer">
+          </div>
+        </div>  
+        <!-- Straße/Nr -->
+        <div class="form-group row">
+          <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white">Straße/Nr.</strong>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="Straße" placeholder="Straße/Nr.">
+          </div>
+        </div>  
+            <!-- PLZ -->
+        <div class="d-flex flex-nowrap ">
+          <div class="order-0 mr-md-5 ">
+            <strong class="mr-md-5 formgroup-label-mandatory text-white justify-content-start " for=""> PLZ&nbsp; &nbsp; &nbsp; &nbsp;</strong>
+          </div>
+          
+          
+          <div class="  col-sm-4  ">
+            <input type="text" class="form-control" id="State" placeholder="State">
+          </div>
+          <div class="  col-sm-2  ">
+            
+            <input type="text" class="form-control" id="zip" placeholder="Zip">
+          </div>
+      </div> 
+      <hr>
+      <!-- Daten abspeichern -->
+      <div class="form-group row  ">
+      <div class=" flex-nowrap "></div>
+      <strong for="colFormLabel  " class="col-sm-4 col-form-label text-white">Daten abspeichern</strong>
+      <button type="button" id="SaveBtn" class="btn btn-success btn-lg">Anzeige aufgeben</button>
+        
+      </div>
+      </div>
+  </div>  
+</div> 
+</form>  
+
+
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="resultModal">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p>Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+</body>
+</html>
+<%- include('../partials/footer.ejs')-%>
+<!-- <script src="/coverage/bs-custom-file-input.js"></script>
+-->
+    <script>
+      
+      /////////////
+
+///////////
+document.querySelector('#SaveBtn').addEventListener('click',(e)=>{
+           e.preventDefault()
+           const title =document.querySelector('#TitleInp').value
+           const productImgs =document.querySelector('#imgsInp').files
+         //  const description = tinymce.get("descriptionInp").getContent();
+           const description=document.querySelector('#descriptionInp').value
+           const preis =document.querySelector('#preisInp').value
+          // const festpreisInp =document.querySelector('#festpreisInp').value
+           const KategorieElement =document.querySelector('#Kategorie')
+           const name =document.querySelector('#nameInp').value
+           const telefonnummer =document.querySelector('#telefonnummer').value
+           const straße =document.querySelector('#Straße').value
+           const state =document.querySelector('#State').value
+           const zip =document.querySelector('#zip').value
+          const fd =new FormData()
+          fd.append('title',title)
+          for (let i = 0; i < productImgs.length; i++) {
+              fd.append('productImgs'+i,productImgs[i])
+            
+          }
+          fd.append('description',description)
+          fd.append('preis',preis)
+         // fd.append('festpreisInp',festpreisInp)
+         // fd.append('verschenken',verschenken)
+          fd.append('name',name)
+          fd.append('telefonnummer',telefonnummer)
+          fd.append('straße',straße)
+          fd.append('state',state)
+          fd.append('zip',zip)
+          fd.append('Kategorie',KategorieElement.options[KategorieElement.selectedIndex].value)
+        
+// send fd to server side using fetch
+let url ='/admin/addProduct'
+//console.log(fd);
+fetch(url, {
+    method: 'POST',
+     body: fd,
+}).then(response => {
+    if (response.status ==200) {
+              response.json().then(data =>{
+                  console.log(data);
+                  switch (data) {
+                      case 1:
+                      showModal(false, " success", " the book saved correcty ")
+            
+            window.location = '/admin/product'
+                          break;
+                  case 2:
+                  showModal(true, "error", " some entries is missing"," sure enter all required data")
+                  break;
+                  case 3:
+                  showModal(true, "book title is exist", " book title is exist ,pieas type another book title")
+                  break;
+                 
+                      default:
+                          break;
+                  }
+
+
+              }).catch(error =>{
+          console.log(error);
+
+          showModal(true, "error", "unknown respons format")
+          
+      })
+          }else{
+            showModal(true, "error" ,"can not send the data")
+          }
+}).catch(error =>{
+    showModal(true, "error", " can not send the data ....")
+})
+})
+    </script>

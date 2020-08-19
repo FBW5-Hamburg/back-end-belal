@@ -1,0 +1,260 @@
+<%- include('../partials/header.ejs')-%>
+<%- include('../partials/navbar.ejs')-%>
+
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row   mt-auto p-2 d-flex justify-content-center">
+  
+
+    <div class="col-sm-9">
+            <h3 class=" text-white mt-auto p-2 d-flex justify-content-center">Willkommen auf Ihrer persönlichen Seite</h3>
+            <hr>
+            <!-- Anzeigentyp         -->
+      <div class=" flex-nowrap"> 
+                   
+          <div class="d-flex flex-nowrap ">
+              <div class="order-0 p-2">
+                <strong class="mr-md-5 formgroup-label-mandatory text-white justify-content-start " for=""> Anzeigentyp   &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</strong>
+              </div>
+              <div class="mr-md-3 order-3 p-2 text-white custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline1">Ich biete</label>
+              </div>
+              <div class="order-3 p-2 text-white custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline2">Ich suche</label>
+              </div>
+          </div> 
+                <!-- Titel der Anzeige -->
+          <div class="form-group row">
+            <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white">Titel der Anzeige</strong>
+            <div class="col-sm-6">
+              <input type="email" class="form-control" id="TitleInp" placeholder="Titel" value="<%=product.title%>">
+            </div>
+          </div>  
+               
+          <div class="form-group row">
+            <strong for="colFormLabel  " class="col-sm-2 mr-md-3 col-form-label text-white">Bilder ändern &nbsp; </strong>
+            <%for(let i = 0; i < product.imgs.length; i++) {%>
+              <div class="col-md-3">
+                  <a href="#" class="deleteImg text-white">löschen X</a>
+                  <img class="bookimg" src="<%=product.imgs[i]%>" alt="">
+              </div>
+          <%}%>
+          <strong for="colFormLabel  " class="col-sm-2 mr-md-3 col-form-label text-white">Fotos hochladen &nbsp; </strong>
+             <div class="custom-file mt-2 col-sm-6">
+             
+              <input type="file" class="form-control-file" multiple id="imgsInp"
+                  accept="image/x-png,image/gif,image/jpeg">
+             </div>
+            
+          </div>
+              <!-- Beschreibung -->
+          <div class="form-group row">
+                <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white">Beschreibung</strong>
+            <div class="custom-file mt-2 col-sm-6">
+              <textarea class="form-control " id="descriptionInp"><%=product.description%></textarea>
+            </div>
+          </div>
+          <br>
+                  <!-- preis -->
+          <div class="d-flex flex-nowrap ">
+            <div class="order-0 p-2 mr-md-5">
+              <strong class="mr-md-5 formgroup-label-mandatory text-white justify-content-start " for=""> Preis &nbsp;  </strong>
+            </div>
+            <div class="col-md-2 mb-2">
+              <input type="text" class="form-control " id="preisInp" required value="<%=product.preis%>">
+              
+            </div>
+            <div class="order-0 p-2">
+              <strong class="mr-md-4 formgroup-label-mandatory text-white justify-content-start " for=""> EUR </strong>
+            </div>
+            <div class="mr-md-5 order-3 p-2 text-white custom-control custom-radio custom-control-inline">
+              <input type="radio" id="festpreisInp" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label"  for="festpreisInp">Festpreis</label>
+            </div>
+            <div class="order-3 p-2 text-white custom-control custom-radio custom-control-inline">
+              <input type="radio" id="verschenken" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label" for="verschenken">Zu verschenken</label>
+            </div>
+        </div> 
+        <hr>
+               <!-- Name -->
+        <div class="form-group row">
+          <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white">Name</strong>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="nameInp" placeholder="Name" value="<%=product.name%>">
+          </div>
+        </div>
+        <!-- Telefonnummer   -->
+        <div class="form-group row">
+          <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white">Telefonnummer</strong>
+          <div class="col-sm-6">
+            <input type="number" class="form-control" id="telefonnummer" placeholder="Telefonnummer" value="<%=product.telefonnummer%>">
+          </div>
+        </div>  
+        <!-- Straße/Nr -->
+        <div class="form-group row">
+          <strong for="colFormLabel  " class="col-sm-2 col-form-label text-white">Straße/Nr.</strong>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="Straße" placeholder="Straße/Nr." value="<%=product.straße%>">
+          </div>
+        </div>  
+            <!-- PLZ -->
+        <div class="d-flex flex-nowrap ">
+          <div class="order-0 mr-md-5 ">
+            <strong class="mr-md-5 formgroup-label-mandatory text-white justify-content-start " for=""> PLZ&nbsp; &nbsp; &nbsp; &nbsp;</strong>
+          </div>
+          
+          
+          <div class="  col-sm-4  ">
+            <input type="text" class="form-control" id="State" placeholder="State" value="<%=product.state%>">
+          </div>
+          <div class="  col-sm-2  ">
+            
+            <input type="text" class="form-control" id="zip" placeholder="Zip" value="<%=product.zip%>">
+          </div>
+      </div> 
+      <hr>
+      <!-- Daten abspeichern -->
+      <div class="form-group row  ">
+      <div class=" flex-nowrap "></div>
+      <strong for="colFormLabel  " class="col-sm-4 col-form-label text-white">Daten abspeichern</strong>
+      <button type="button" id="SaveBtn" class="btn btn-success btn-lg">Anzeige aufgeben</button>
+        
+      </div>
+      </div>
+  </div>  
+</div> 
+
+
+
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="resultModal">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p>Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+</body>
+</html>
+<%- include('../partials/footer.ejs')-%>
+<!-- <script src="/coverage/bs-custom-file-input.js"></script>
+-->
+    <script>
+      
+      /////////////
+
+///////////
+document.querySelectorAll('.deleteImg').forEach(element => {
+        element.addEventListener('click', e => {
+            e.preventDefault()
+            e.target.parentElement.remove()
+        })
+    })
+    ///
+document.querySelector('#SaveBtn').addEventListener('click',(e)=>{
+           e.preventDefault()
+           const title =document.querySelector('#TitleInp').value.trim()
+           if (!title) {
+            showModal(true, 'k title is empty', ' Title should not be empty')
+            // return gonna stop the function idf the book title is empty
+            return
+        }
+        const oldImgsElements = document.querySelectorAll('.bookimg')
+           const newproductImgs =document.querySelector('#imgsInp').files
+           if (oldImgsElements.length == 0 && newproductImgs.length == 0) {
+            showModal(true, 'images Error', 'you can not save your product without images')
+            return
+        }
+      
+         //  const description = tinymce.get("descriptionInp").getContent();
+           const description=document.querySelector('#descriptionInp').value
+           const preis =document.querySelector('#preisInp').value
+          // const festpreisInp =document.querySelector('#festpreisInp').value
+          // const verschenken =document.querySelector('#verschenken').value
+           const name =document.querySelector('#nameInp').value
+           const telefonnummer =document.querySelector('#telefonnummer').value
+           const straße =document.querySelector('#Straße').value
+           const state =document.querySelector('#State').value
+           const zip =document.querySelector('#zip').value
+console.log(title);
+console.log(oldImgsElements);
+console.log(newproductImgs);
+console.log(description);
+console.log(preis);
+console.log(name);
+console.log(telefonnummer);
+console.log(straße);
+console.log(state);
+console.log(zip);
+           
+          const fd =new FormData()
+          fd.append('productid', '<%=product.id%>')
+          fd.append('newTitle',title)
+          const oldImgsArr = []
+        oldImgsElements.forEach(img => {
+            oldImgsArr.push(img.src)
+           
+        })
+        
+       // console.log(oldImgsArr);
+        fd.append('oldImgsUrls', JSON.stringify(oldImgsArr))
+          for (let i = 0; i < newproductImgs.length; i++) {
+         fd.append('productimg'+ i, newproductImgs[i])
+            
+          }
+          
+          fd.append('newdescription',description)
+          fd.append('newpreis',preis)
+        
+          fd.append('newname',name)
+          fd.append('newtelefonnummer',telefonnummer)
+          fd.append('newstraße',straße)
+          fd.append('newstate',state)
+          fd.append('newzip',zip)
+        
+       
+// send fd to server side using fetch
+
+console.log(fd);
+fetch('/admin/editProduct', {
+    method:'POST',
+     body:fd,
+     
+}).then(response => {
+    if (response.status ==200) {
+              response.json().then(data =>{
+                  console.log(data);
+                  if (data === 1) {
+                        showModal(false, 'success update', 'your book updated successfuly')
+                    } else {
+                        showModal(true, ' server error', 'call the admin because of this error')
+                    }
+                }).catch(error => {
+                    showModal(true, ' server error', 'call the admin because of this error')
+                })
+            } else {
+                showModal(true, 'Error', 'can not send the data')
+            }
+        }).catch(error => {
+            showModal(true, 'Error', 'can not send the data')
+         
+        })
+})
+    </script>

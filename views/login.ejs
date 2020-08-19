@@ -1,0 +1,109 @@
+<%- include('../partials/header.ejs')-%>
+<%- include('../partials/navbar.ejs')-%>
+
+<div class="container register">
+    <div class="row">
+    <div class="col-md-3 register-left">
+    <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+    <h3>Welcome</h3>
+    <p>You are 30 seconds away from earning your own money!</p>
+    </div>
+    <div class="col-md-9  container">
+        
+       <div class="row "> 
+          
+    <ul class=" pager  nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item ">
+    <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+    </li>
+    <li class="nav-item ">
+    <a class="nav-link" id="newuser-tab" data-toggle="tab" href="#newuser" role="tab" aria-controls="newuser" aria-selected="false">New User</a>
+    </li>
+    </ul>
+
+</div>
+    <div class="tab-content" id="myTabContent">
+    <div class=" fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+    <h3 class="register-heading">Login</h3>
+    <div class="row register-form ">
+    <div class="col-md-9 profile_card">
+        
+        <div class=" form-group">
+            <i class="fa fa-envelope-o"></i>
+            <input type="text" class="form-control" id="emaiLogen" placeholder="Email" value="" />
+        </div>
+        <div class="form-group">
+                 <i class="fa fa-lock"></i>
+            <input type="password" class="form-control" id="passLogen" placeholder="Password *" value="" />
+        </div>
+        
+       
+    </div>
+    </div>
+    <a class="text-danger " href="/forgot"> Passwort vergessen?</a>
+    <div class="col-md-4 p-2">
+        <input type="submit" class="btn btn-primary" id="loginBtn" value="login" />
+        </div>
+    </div>
+    
+
+    <div class="col-md-12 tab-pane fade show" id="newuser" role="tabpanel" aria-labelledby="newuser-tab">
+    <h3 class="register-heading">New User</h3>
+    <div class="row register-form">
+    <div class="col-md-6">
+        <div class="form-group">
+            <input type="text" id="fname" class="form-control" placeholder="First Name *" value="" />
+        </div>
+        <div class="form-group">
+            <input type="text" id="lname" class="form-control" placeholder="Last Name *" value="" />
+        </div>
+        <div class="form-group">
+            <input type="email" id="emailInp" class="form-control" placeholder="Email *" value="" />
+        </div>
+        
+    
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <input type="password" id="passInp" class="form-control" placeholder="Password *" value="" />
+        </div>
+        <div class="form-group">
+            <input type="password" id="repassInp" class="form-control" placeholder="Confirm Password *" value="" />
+        </div>
+        
+         
+    </div>
+    <div class="col-md-12">
+      <input type="submit" class="pager btn btn-primary" id="registerBtn" value="Register" />
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+<!-- modul -->
+<div class="modal" tabindex="-1" role="dialog" id="resultModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+<%- include('../partials/footer.ejs')-%>

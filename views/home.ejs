@@ -1,0 +1,56 @@
+<%- include('../partials/header.ejs')-%>
+<%- include('../partials/navbar.ejs')-%>
+
+<div class="container-fluid">
+
+    <div class="row  ">
+        
+        <div class="col-sm-12 col-md-3 col-lg-2  p-2  pl-3 bg-dark text-white ">
+        
+        <form action="/home" method="POST">
+            <div id="list-example" class="list-group ">
+                <a class="list-group-item list-group-item-action pt-3 mb-3 bg-dark text-white" href="/home"> All Kategorien</a>
+                <%for (let i = 0; i < allproduct.length; i++){%>
+                <a class="list-group-item list-group-item-action  p-3 bg-dark text-white" href="/home/<%= allproduct[i].kategorie%>"><%= allproduct[i].kategorie%></a>
+                <%}%>
+            </div>
+        </form>
+        </div>
+    
+        <div class="row  p-1 col-sm-12 col-md-9 col-lg-10 pl-1 ">
+         <p class=" p-1 bg-dark p-3 ml-3 pl-2  font-weight-bold text-white pargraf">   
+             Willkommen bei Kleinanzeigen . Wir sind ein kostenloser Service, um Ihre Anzeigen zu vermarkten oder nach Ihren Interessen zu suchen. Sie können sich einfach auf der Website  <a class="" href="/register">Registrieren</a> </p>
+           <%for (let i = 0; i < allproduct.length; i++){%>
+        <div class="col-sm-12 col-md-6 col-lg-3 p-4 ">
+            <div class="product-grid5 list-group">
+                <div class="product-grid5">
+                    <div class="product-image5 ">
+                        <a href="home/product-single/<%= allproduct[i].title.trim().replace(/ /g, '_')%>/<%= allproduct[i].id%>">
+                            <img class="pic-1" src="<%= allproduct[i].imgs[0]%>" alt="img">
+                            <img class="pic-2" src="<%= allproduct[i].imgs[1]%>" alt="img">
+                        </a>
+                        <ul class="social">
+                            <li class="text-white"><%= allproduct[i].preis%> E</li>
+                            <!-- <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li> -->
+                        </ul>
+                        <a href="home/product-single/<%= allproduct[i].title.trim().replace(/ /g, '_')%>/<%= allproduct[i].id%>" class="select-options"><i class="fa fa-arrow-right"></i> Siehe Einzelheiten</a>
+                    </div>
+                    <div class="product-content par">
+                        
+                        <h3 class="title text-white"><a href="home/product-single/<%= allproduct[i].title.trim().replace(/ /g, '_')%>/<%= allproduct[i].id%>"><%= allproduct[i].title%></a></h3>
+                        
+                        <p class="par text-white"><%= allproduct[i].state%></p>
+                        <p class="par text-white"><%= allproduct[i].straße%><%= allproduct[i].zip%>  </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%}%>
+        </div>
+    </div>    
+</div>                                 
+
+<%- include('../partials/footer.ejs')-%>
+ 

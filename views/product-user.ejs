@@ -1,0 +1,71 @@
+<%- include('../partials/header.ejs')-%>
+<%- include('../partials/navbar.ejs')-%>
+
+
+  
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 600px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content ">
+    <div class="col-sm-3 sidenav p-3 mb-2 bg-dark text-white  ">
+      <h4>John's Blog</h4>
+     
+      <div id="list-example" class="list-group ">
+        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-1">Item 1</a>
+        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-2">Item 2</a>
+        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-3">Item 3</a>
+        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-4">Item 4</a>
+      </div>
+     
+      
+    </div>
+
+    <div class="col-sm-9">
+        <h2 class="text-white mt-auto p-3 d-flex justify-content-center">Willkommen auf Ihrer persönlichen Seite</h2>
+        <div class="col-sm-6 ">
+            <h3><span class="badge badge-dark"><a href="/admin/addProduct" class="badge badge-dark"><svg width="3em" height="2em" viewBox="0 0 16 16" class="bi bi-images" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M12.002 4h-10a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-10-1a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-10z"/>
+                <path d="M10.648 8.646a.5.5 0 0 1 .577-.093l1.777 1.947V14h-12v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
+                <path fill-rule="evenodd" d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z"/>
+              </svg> Fügen Sie einen neuen Artikel hinzu</a></span></h3>    
+        </div>
+        <hr>
+        
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid">
+  <p>Footer Text</p>
+</footer>
+
+</body>
+</html>
+<%- include('../partials/footer.ejs')-%>
