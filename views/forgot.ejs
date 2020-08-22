@@ -1,9 +1,10 @@
-<%- include('../partials/header.ejs')-%>
-<%- include('../partials/navbar.ejs')-%>
+<%- include('./partials/header.ejs')-%>
+<%- include('./partials/navbar.ejs')-%>
 <div class="container">
 <div class="row">
 	<div class="col-md-6">
 		<form >
+           
 			<h2><strong for="colFormLabel  " class="col-sm-2 col-form-label text-white p-5 m-5"></h2>
               <h3 class="m-5"> Passwort vergessen</h3>  
 			<div class="form-group">
@@ -36,15 +37,12 @@
       </div>
     </div>
   </div>
-<%- include('../partials/footer.ejs')-%>
+<%- include('./partials/footer.ejs')-%>
 <script>
     document.querySelector('#loginBtn').addEventListener('click', e => {
     e.preventDefault()
     const email = document.querySelector('#emaiLogen').value.trim()
-   
-    
-    if (email  ) {
-       
+    if (email ) {
         const sentObj = {
             email
         }
@@ -61,10 +59,11 @@
                     console.log(data)
                     switch (data) {
                         case 1:
-                            window.location = '/login'
+                        showModal(false, "Register Success", "you can go to login page...")
+                           
                             break;
                         case 2:
-                        showModal(true, "missing ertries", "you miss some entries ")
+                        showModal(true, "missing ertries", "no accent with email address exsts")
                             break;
                         case 3:
                             showModal(true, "Email Error", "Either the email not exsist")

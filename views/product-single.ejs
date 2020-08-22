@@ -1,5 +1,5 @@
-<%- include('../partials/header.ejs')-%>
-<%- include('../partials/navbar.ejs')-%>
+<%- include('./partials/header.ejs')-%>
+<%- include('./partials/navbar.ejs')-%>
 <div class="container-fluid">
 <section class="product-sec pt-1">
     
@@ -64,7 +64,7 @@
                       <div class="d-flex justify-content-center pt-3">
                     <button type="button" class="btn btn-primary d-flex justify-content-center" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><span class="mt-auto pr-2"><i class="far fa-envelope bigicon"></i></span><h5 class="mt-auto pt-1">Nachricht Schreiben</h5></button>
                     </div>
-                      
+                      <form action="/admin/peoduct" method="POST" >
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog ">
                         <div class="modal-content">
@@ -94,12 +94,7 @@
                                     </div>
                                 </div>
                                 
-                                <!-- <div class="form-group">
-                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-                                    <div class="col-md-12">
-                                        <input id="phone" name="phone" type="text" placeholder="Phone" class="form-control">
-                                    </div>
-                                </div> -->
+                              
         
                                 <div class="form-group mt-auto p-2 d-flex justify-content-center">
                                     <span class=""><i class="far fa-comment bigicon"></i></span>
@@ -120,7 +115,7 @@
                         </div>
                       </div>
                     </div>
-                    
+                   </form>
                    
                 </div>
            </div>
@@ -151,7 +146,7 @@
 </section>
 </div>
 
-<%- include('../partials/footer.ejs')-%>
+<%- include('./partials/footer.ejs')-%>
 <script>
     let plasAttr=''
                 

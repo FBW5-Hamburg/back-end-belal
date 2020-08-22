@@ -5,28 +5,25 @@
  const {response}=require('express')
  const fs= require("fs")
  const flash = require("connect-flash")
- const url=  mongoose.connect('mongodb://localhost:27017', {
-     useUnifiedTopology: true, useCreateIndex:true, useNewUrlParser:true,},(err)=>{
-      if (err) {
-          console.log(err);
-      } else {
-          console.log('hello mongoose');
-      }
-  })
+ const connectionString = 'mongodb+srv://belal:0966405529@cluster0.rpkhr.mongodb.net/test?retryWrites=true&w=majority'
  function connect() {
-     return new Promise((resolve,reject) =>{
-         if(mongoose.connection.readyState ===1){
-
-           resolve()
-         }else{
-             mongoose.connect(url).then(()=>{
-                 resolve()
-             }).catch(eroor =>{
-                 reject(eroor)
+    return new Promise((resolve, reject) => {
+        if (mongoose.connection.readyState === 1) {
+            resolve()
+        } else {
+            mongoose.connect(connectionString, {
+                useUnifiedTopology: true,
+                useCreateIndex: true,
+                useNewUrlParser: true
+            }).then(() => {
+                resolve()
+                console.log('hello mongoose');
+            }).catch(error => {
+                reject(error)
             })
-         }
+        }
     })
- }
+  }
  const Schema = mongoose.Schema
  const userSchema = new Schema({
      fname:{
@@ -75,12 +72,8 @@
                 email,
                 verfied: false,
                 date:Date.now()
-
             })
-
             newUser.save().then(()=>{
-
-
                 let message = 'Hi ' + fname + ' ' + lname + 'Welcome to our Website\n'
                 message += 'to verify you email address please click in the following link\n'
                 message += '' + newUser._id
@@ -274,10 +267,10 @@ function getAllProducts() {
         connect().then(() => {
 
             Product.find().then(prod =>{
-                prod.forEach(pro=>{
-                    pro['id']=pro['id']
+            //     prod.forEach(pro=>{
+            //         pro['id']=pro['_id']
               
-              })
+            //   })
 
            
             resolve( prod)
@@ -299,12 +292,9 @@ function getKategorien(kategorie) {
         connect().then(() => {
 
             Product.find({kategorie: kategorie}).then(kategor =>{
-                 kategor.forEach(katego=>{
-                     katego['id']=katego['id']
+                 
 
-               })
-
-             // console.log(kategor);
+             console.log(kategorie);
 
             resolve( kategor)
 
@@ -377,8 +367,13 @@ function getuser(id) {
               prod.forEach(pro=>{
                 pro['id']=pro['_id']
               })
-            resolve( prod)
+              Users.findOne({_id:id}).then(user=>{
+            resolve({ prod:prod,user:user})
            // console.log(prod);
+        }).catch(error => {
+
+            reject(error)
+        })
           }).catch(error => {
 
             reject(error)
@@ -523,35 +518,33 @@ function deleteProduct(productid, userid) {
     
   }
 
-  function updateUser(newfname,newlname,newemail,password,userId ) {
-    try {
-  
+  function updateUser(newfname,newlname,newemail,userId ) {
         return new Promise((resolve, reject) => {
-            (async()=>{
-         await Users.updateOne({_id: userId}),{
+            connect().then(()=> {
+                
+         Users.updateOne({_id: userId},{ $set:{
             fname:newfname,
-            lname:newlname,
-            password:password,
+            lname:newlname, 
             email:newemail,
                 $inc:{__v:1}
-          }
-          if (_id= userId) {
-            user.id=user._id
-     //   console.log(user);
-        resolve()
-        } else {
+         }
+           
+          }).then(user=>{
 
-            reject(new Error('can not find a user with this id'))
-        }
-        })()
-        }).catch(error => {
-            reject(error)
+           
+        resolve(user)
+          }).catch(error => {
+            reject(3)
         })
-    } catch (error) {
-        reject(error)
-    }
-}
-
+         
+        
+     
+        }).catch(error => {
+            reject(4)
+        })
+    
+})
+  }
 ////////////
 function checkEmail(email) {
     // your code
@@ -563,7 +556,7 @@ function checkEmail(email) {
               
                  if (user) {
                    user.passwordToken = user.id
-                   user.save().then(() => {
+                   user.save().then((user) => {
                        console.log(user);
                     resolve(user)
                    }).catch(error => {
@@ -590,18 +583,44 @@ function checkPassword(password,userToken) {
     return new Promise((resolve, reject) => {
         connect().then(()=> {
             Users.find({
-                password:userToken
+                passwordToken:userToken
             }).then(user => {
-                user.forEach(resul => {
-                    resul[id]=result[passwordToken]
-                });
-                if (resul) {
-                    if (passwordHash.verify(password, user.password ==user.passwordToken)) {
-                        console.log(resul);
-                        resolve(resul)
-                    } else {
+               // console.log(resul);
+                if (user) {
+
+                    user.password = passwordHash.generate(password)
+                    user.passwordToken = ''
+                    Users.updateOne({_id: userToken },{ $set: {
+                         password: passwordHash.generate(password),
+                         passwordToken: ''
+                        } }).then(() => {
+                        resolve()
+                    }).catch(error => {
                         reject(3)
-                    }
+                    })
+                } else {
+                  reject(3)
+                }
+            }).catch(error => {
+
+                reject(error)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+function checkPasswordToken(token) {
+    // your code
+    return new Promise((resolve, reject) => {
+        connect().then(()=> {
+            Users.findOne({
+                passwordToken: token
+            }).then(user => {
+            //  console.log(user);
+                if (user) {
+                    resolve()
+                    
                 } else {
                   reject(3)
                 }
@@ -628,7 +647,8 @@ module.exports={
     deleteProduct,
     updateUser,
     checkEmail,
-    checkPassword
+    checkPassword,
+    checkPasswordToken
     
 
 }

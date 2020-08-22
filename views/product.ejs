@@ -1,5 +1,5 @@
-<%- include('../partials/header.ejs')-%>
-<%- include('../partials/navbar.ejs')-%>
+<%- include('./partials/header.ejs')-%>
+<%- include('./partials/navbar.ejs')-%>
 
 
   
@@ -33,11 +33,8 @@
 <body>
 
 <div class="container-fluid">
-  <div class="row content ">
-    <div class="col-sm-2 sidenav p-3 mb-2 bg-dark text-white  ">
-      
-      
-      
+  <div class="row  ">
+    <div class="col-sm-12 col-md-3 col-lg-2 sidenav p-3 mb-2 bg-dark text-white  ">
 
       <div id="list-example" class="list-group ">
        
@@ -54,32 +51,34 @@
       
     </div>
 
-    <div class="col-sm-9">
-        <h2 class="text-white mt-auto p-3 d-flex justify-content-center">Willkommen <%= sm.fname%> <%= sm.lname%> auf Ihrer persönlichen Seite</h2>
-        <div class="col-sm-6 ">
-            <h3><span class="badge badge-dark"><a href="/admin/addProduct" class="badge badge-dark"><svg width="3em" height="2em" viewBox="0 0 16 16" class="bi bi-images" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <div class="row p-2 pl-5 col-sm-12 col-md-9 col-lg-10">
+        <h3 class="col-sm-12 text-white mt-auto p-2 d-flex justify-content-center">Willkommen <%= sm.fname%> <%= sm.lname%> auf Ihrer persönlichen Seite</h3>
+        <div class="col-sm-12 mr-5">
+            <h3><span class=" badge badge-dark"><a href="/admin/addProduct" class="badge badge-dark"><svg width="3em" height="2em" viewBox="0 0 16 16" class="bi bi-images" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M12.002 4h-10a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-10-1a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-10z"/>
                 <path d="M10.648 8.646a.5.5 0 0 1 .577-.093l1.777 1.947V14h-12v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
                 <path fill-rule="evenodd" d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z"/>
               </svg> Fügen Sie einen neuen Artikel hinzu</a></span></h3>    
+              
         </div>
         <hr>
-        <section class="static about-sec">
-          <div class="container">
+        
+          
               
-              <h2 class="text-white">Deine Produkte</h2>
-              <div class="recent-book-sec">
+              <h3 class="col-sm-12 text-white">Deine Produkte</h3>
+             
+              
                 <% if(products.length==0){%>
                   <h4> SIe haben keine Product</h4>
                   <%} else{%>
-                  <div class="row">
+                  
                       <%for (let i = 0; i < products.length; i++){%>
-                      <div class="col-md-3">
-                          <div class="product-image">
+                      <div class="col-sm-12 col-md-4 col-lg-3 mr-5  bg-dark">
+                          <div class="p2 pt-2">
                             <span class="preis"> <%= products[i].preis%> E</span>
                             <a href="/admin/product/<%=products[i].id%>">
-                              <img  class="productimage" src="<%= products[i].imgs[0]%>" alt="img"> </a>
-                              <h4><a class="text-white" href="/admin/product/<%=products[i].id%>"><%= products[i].title%></a></h4>
+                              <img  class="productimage " src="<%= products[i].imgs[0]%>" alt="img"> </a>
+                              <h5 class="text-white"><%= products[i].title%></h5>
                               <p class="text-white">Wenn Sie das Produkt ändern möchten, klicken Sie auf Edit</p>
                               <p class="text-white">Wenn Sie das Produkt löschen möchten, klicken Sie auf Delete</p>
                               <button type="button" class="btn btn-success"><a class="text-white" href="/admin/product/<%=products[i].id%>">Edit</a></button>
@@ -87,13 +86,15 @@
                               <h6>&nbsp;&nbsp;&nbsp;</h6>
                           </div>
                       </div>
+                      
                       <%}%>
-                  </div>
+                  
                   <%}%>
                   
-              </div>
-          </div>
-      </section>
+             
+           
+          
+     
     </div>
   </div>
 </div>
@@ -138,7 +139,7 @@
 
 </body>
 </html>
-<%- include('../partials/footer.ejs')-%>
+<%- include('./partials/footer.ejs')-%>
 <script>
   let productid;
         document.querySelectorAll('.showDeleteModalBtn').forEach(btn => {

@@ -1,5 +1,5 @@
-<%- include('../partials/header.ejs')-%>
-<%- include('../partials/navbar.ejs')-%>
+<%- include('./partials/header.ejs')-%>
+<%- include('./partials/navbar.ejs')-%>
 
 <div class="container ">
     <div class="row  content">
@@ -37,25 +37,25 @@
           <input type="email" id="reEmailInp" class="form-control" placeholder="Email *" value="" />
        </div>
       </div>
-      <div class="form-group row">
+      <!-- <div class="form-group row">
         <strong for="colFormLabel  " class="col-sm-6 col-form-label text-white">Neues Passwort</strong>
         <div class="col-sm-6">
           <input type="password" id="passInp" class="form-control" placeholder="Password *" value="" />
-       </div>
+       </div> 
       </div>
       <div class="form-group row">
         <strong for="colFormLabel  " class="col-sm-6 col-form-label text-white">Neues Passwort wiederholen</strong>
         <div class="col-sm-6">
           <input type="password" id="repassInp" class="form-control" placeholder="Confirm Password *" value="" />
        </div>
-      </div>
+      </div>-->
       <div class="form-group row">
         <strong for="colFormLabel  " class="col-sm-6 col-form-label text-white"></strong>
         <div class="col-sm-6 p-2 d-flex">
-          <input type="submit" class="pager btn btn-primary p-2 d-flex" id="registerBtn" value="Neue data speichern" />
+          <input type="submit" class="pager btn btn-primary p-2 d-flex" id="registerBtn1" value="Neue data speichern" />
        </div>
       </div>
-        </div>
+     </div>
         
         
     
@@ -92,10 +92,10 @@
   
 
 
-<%- include('../partials/footer.ejs')-%>
+<%- include('./partials/footer.ejs')-%>
 <script>
  
-document.querySelector('#registerBtn').addEventListener('click',(e)=>{
+document.querySelector('#registerBtn1').addEventListener('click',(e)=>{
            e.preventDefault()
            const fname =document.querySelector('#fname').value.trim()
            if (!fname) {
@@ -121,26 +121,26 @@ document.querySelector('#registerBtn').addEventListener('click',(e)=>{
            
             return
         }
-        const password =document.querySelector('#passInp').value.trim()
-           if (!password) {
-            showModal(true, 'k password is empty', ' password  should not be empty')
+        // const password =document.querySelector('#passInp').value.trim()
+        //    if (!password) {
+        //     showModal(true, 'k password is empty', ' password  should not be empty')
            
-            return
-        }
-        const repassword =document.querySelector('#repassInp').value.trim()
-           if (!password) {
-            showModal(true, 'k repassword is empty', ' repassword  should not be empty')
+        //     return
+        // }
+        // const repassword =document.querySelector('#repassInp').value.trim()
+        //    if (!password) {
+        //     showModal(true, 'k repassword is empty', ' repassword  should not be empty')
            
-            return
-        }
-        if (fname&&lname&&password&& password ==repassword) {
+        //     return
+        // }
+        if (fname&&lname&&email&& email ==reEmail) {
           const fd =new FormData()
-          fd.append('newfname',fname)
+         
           fd.append('newfname',fname)
           fd.append('newlname',lname)
           fd.append('newemail',email)
-          fd.append('password',password)
-          fd.append('repassword',repassword)
+          // fd.append('password',password)
+          // fd.append('repassword',repassword)
           fd.append('userId',' <%=sm._id%>')
          
           fetch('/admin/edit-data', {

@@ -1,5 +1,5 @@
-<%- include('../partials/header.ejs')-%>
-<%- include('../partials/navbar.ejs')-%>
+<%- include('./partials/header.ejs')-%>
+<%- include('./partials/navbar.ejs')-%>
 
 </head>
 <body>
@@ -153,7 +153,7 @@
 </div>
 </body>
 </html>
-<%- include('../partials/footer.ejs')-%>
+<%- include('./partials/footer.ejs')-%>
 <!-- <script src="/coverage/bs-custom-file-input.js"></script>
 -->
     <script>
@@ -243,6 +243,7 @@ fetch('/admin/editProduct', {
                   console.log(data);
                   if (data === 1) {
                         showModal(false, 'success update', 'your book updated successfuly')
+                        window.location = '/admin/product'
                     } else {
                         showModal(true, ' server error', 'call the admin because of this error')
                     }

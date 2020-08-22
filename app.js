@@ -1,21 +1,18 @@
 const express =require('express')
 const session = require('express-session')
-//const logger =require('morgan')
-const mongoose =require('mongoose')
-const async =require('async')
-const crypto =require('crypto')
+const fs = require('fs')
+// const mongoose =require('mongoose')
+// const async =require('async')
+// const crypto =require('crypto')
 const flash = require("connect-flash")
-//const sequelize =require('sequlize')
-//const Op =sequelize.Op
-
-const io =require('socket.io')
+const port = process.env.PORT || 3000
+//const io =require('socket.io')
 const fileupload = require('express-fileupload')
 const adminRouter =require('./routes/user-routes') 
-const path =require('path')
+//const path =require('path')
 const cookie = require('cookie-parser')
 const db =require('./modulesData/mongoosData')
 const emailSender =require('./modulesData/emailSender')
-const { brotliDecompress } = require('zlib')
 const app =express()
 app.use(express.static(__dirname + '/public'))
 app.use(express.static('node_modules'))
@@ -31,33 +28,43 @@ const sessionOptions = {
 }
 app.use(session(sessionOptions))
 app.use(cookie())
-
 app.use(fileupload({
     limits: { fileSize: 50 * 1024 * 1024 }
 }))
 
+app.use(function(req, res, next) {
+    res.locals.user = req.session.user;
+    next();
+  });
 app.use('/admin',adminRouter)
-app.use(flash());
+//app.use(flash());
 
- app.get('/home',(req,res)=>{
+ app.get('/',(req,res)=>{
+    
      db.getAllProducts().then(allproduct => {
+       
          res.render('home', {allproduct})
-     })
+     }).catch(error=>{
+       
+        res.send('404,Product could not be found')
+    })
  })
- app.get('/home/:kategorie',(req,res)=>{
-    let kategori=req.query.kategorie
-   
+ app.get('/about',(req,res)=>{
+        res.render('about')
+    
+})
+ app.get('/katergorie/:kategorie',(req,res)=>{
        db.getKategorien(req.params.kategorie).then(kategorie => {
            res.render('kategorie', {kategorie})
           // console.log(kategorie);
-       })
+       }).catch(error=>{
+        res.send('404,Product could not be found')
+    })
     
    
 })
-app.get('/home/product-single/:title/:id', (req, res) => {
-   //console.log(req.session.user)
+app.get('/product-single/:title/:id', (req, res) => {
     db.getProduct(req.params.id).then((product) => {
-      // console.log(product.user);
         let checLogin =false
         if (req.session.user) {
             checLogin =true
@@ -70,9 +77,22 @@ app.get('/home/product-single/:title/:id', (req, res) => {
     })
     
 })
-
-
-
+app.get('/katergorie/product-single/:title/:id', (req, res) => {
+    
+     db.getProduct(req.params.id).then((product) => {
+       // console.log(product.user);
+         let checLogin =false
+         if (req.session.user) {
+             checLogin =true
+         }
+ 
+         res.render('product-single', {product:product.product,checLogin,user:product.user})
+        // console.log();
+     }).catch(error=>{
+         res.send('404,Product could not be found')
+     })
+     
+ })
 app.get('/register',(req,res)=>{
           res.render('register')
 })
@@ -105,15 +125,14 @@ app.post('/register',(req,res)=>{
 
         ////////////
         app.get('/login',(req,res)=>{
-            
-             if (req.session.user){
-                     res.redirect('/login')
-                 } else {
-                    res.render('login')
-                  }
+            if (req.session.user){
+                console.log(req.session.user);
+                res.redirect('/admin/product')
+            } else {
+                res.render('login')
+            }
         })
   app.post('/login',(req,res)=>{
-
           if (req.body.email && req.body.password) {
            db.checkUser(req.body.email.trim(), req.body.password).then(user => {
                  req.session.user = user
@@ -131,17 +150,16 @@ app.post('/register',(req,res)=>{
          }
    
   })
+  
   app.get('/forgot',(req,res)=>{
+  
 res.render('forgot')
-    
-
 })
 app.post('/forgot',(req,res)=>{
     const emailus =req.body.email
     console.log(emailus);
 if (emailus) {
     db.checkEmail(req.body.email.trim() ).then(user=>{
-
                  //console.log(user)
                  const message = 'to reset your password please click the following link\n'+
                  'http://localhost:3000/changepassword/'+user.id
@@ -167,15 +185,22 @@ if (emailus) {
 })
 app.get('/changepassword/:id', (req, res) => {
 const userToken = req.params.id
-     res.render('changepassword',{userToken})
+console.log(userToken);
+db.checkPasswordToken(userToken).then(() => {
+    res.render('changepassword',{userToken})
+}).catch(error => {
+    res.send('this link is not valid')
 })
-app.post('/changepassword/:token', (req, res) => {
-    const password=req.body.password
-    const repassword=req.body.repassword
-    const userToken = req.params.token
-    console.log(password,userToken);
-    if (password && repassword) {
-        db.checkPassword(password).then(()=> {
+    
+
+     
+})
+app.post('/changepassword', (req, res) => {
+    const newpassword=req.body.password
+    const userToken = req.body.token
+    console.log(newpassword,userToken);
+    if (newpassword) {
+        db.checkPassword(newpassword,userToken).then(()=> {
             
               res.json(1)
           }).catch(error => {
@@ -193,16 +218,17 @@ app.post('/changepassword/:token', (req, res) => {
 
 
    app.get('/allProductUser/:id', (req, res) => {
-    
-    let sm=req.params
-   // console.log(sm);
-       db.getuser(sm.id).then(products => {
-           console.log(sm.id);
-            res.render('allProductUser', {products,sm})
-           // console.log(products);
-        }).catch(error=>{
-            res.send('404,Product could not be found')
-        })
+     let sm=req.params
+    // console.log(sm);
+   
+        db.getuser(sm.id).then(product => {
+           
+            console.log(sm.id);
+             res.render('allProductUser', {products:product.prod,user:product.user})
+            // console.log(products);
+         }).catch(error=>{
+             res.send('404,Product could not be found')
+         })
        
         
    
@@ -239,23 +265,12 @@ app.get('/search', (req, res) => {
     console.log(dv);
     db.search(req.query.term).then(result => {
         res.render('search', {result})
+    }).catch(error=>{
+        res.send('404,Product could not be found')
     })
-            })
-    
-  
-    
- 
-// app.post('/search', (req, res) => {
-//     // const dv=req.query.term
-//     // console.log(dv);
-//     db.search(dv).then(result =>{
-//        // console.log(result);
-//             })  
-//  })
+    })
+            
 
-
-
-
-  app.listen(3000,()=>{
+  app.listen(port,()=>{
     console.log('it is working on port 3000')
 })

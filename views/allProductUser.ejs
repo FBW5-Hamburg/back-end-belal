@@ -1,122 +1,225 @@
-<%- include('../partials/header.ejs')-%>
-<%- include('../partials/navbar.ejs')-%>
+<%- include('./partials/header.ejs')-%>
+<%- include('./partials/navbar.ejs')-%>
 
 
-  
-  <style>
-    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {height: 100%}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height: auto;} 
-    }
-  </style>
-</head>
-<body>
-  <div class="container-fluid">
+
+<div class="container"> 
+<section class="product-sec p-3">
     <%for (let i = 0; i < products.length; i++){%>
-    <section class="product-sec">
-        <div class="container ">
-          
-            <div class="row bg-dark text-white mt-2 pt-3">
-                <h1 class="col-md-12  bg-dark text-white p-1"><%=products[i].title%></h1>
-                <div class="col-md-12 slider-sec ">
-                    <!-- main slider carousel -->
-                    <div id="myCarousel" class="carousel slide">
-                        <!-- main slider carousel items -->
-                        <div class="col-md-12 carousel-inner">
-                            <%for (let x = 0; x < products[i].imgs.length; x++){%>
-                            <div class="<%= x == 0 ? 'active' : '' %> item carousel-item" data-slide-number="<%=x%>">
-                                <img src="<%=products[i].imgs[x]%>" class="img-fluid img1">
-                            </div>
-                            <%}%>
-                            
+           
+<div class="container bg-dark text-white p-3">
+    <div class="row   ">
+       
+            <div class="col-md-8 col-lg-8 bg-dark text-white  slider-sec p-2">
+                <h3 class="  bg-dark text-white  d-flex justify-content-center"><%=products[i].title%></h3>
+                <!-- main slider carousel -->
+                <div id="myCarousel" class="carousel slide col-sm-12 col-md-12">
+                    <!-- main slider carousel items -->
+                    <div class="col-md-12 carousel-inner p-2">
+                        <%for (let x = 0; x < products[i].imgs.length; x++){%>
+                        <div class="<%= x == 0 ? 'active' : '' %> item carousel-item" data-slide-number="<%=x%>">
+                            <img src="<%=products[i].imgs[x]%>" class="img-fluid img1">
                         </div>
-                        <!-- main slider carousel nav controls -->
-                        <ul class="carousel-indicators list-inline">
-                            <%for (let x = 0; x < products[i].imgs.length; x++){%>
-                            <li class="list-inline-item <%= x == 0 ? 'active' : '' %>">
-                                <a id="carousel-selector-0" class="<%= x == 0 ? 'selected' : '' %>" data-slide-to="<%=x%>" data-target="#myCarousel">
-                                <img src="<%=products[i].imgs[x]%>" class="img-fluid">
-                            </a>
-                            </li>
-                            <%}%>
-                            
-                        </ul>
-                       
+                        <%}%>
+                        
                     </div>
-                    
-                    <!--/main slider carousel-->
+                    <!-- main slider carousel nav controls -->
+                    <ul class="carousel-indicators list-inline">
+                        <%for (let x = 0; x < products[i].imgs.length; x++){%>
+                        <li class="list-inline-item <%= x == 0 ? 'active' : '' %>">
+                            <a id="carousel-selector-0" class="<%= x == 0 ? 'selected' : '' %>" data-slide-to="<%=x%>" data-target="#myCarousel">
+                            <img src="<%=products[i].imgs[x]%>" class="img-fluid">
+                        </a>
+                        </li>
+                        <%}%>
+                        
+                    </ul>
+                   
                 </div>
                 
+                <!--/main slider carousel-->
             </div>
-
-            <dl class="row bg-dark text-white p-2">
-                <dt class="col-sm-2">Preis</dt>
-                <dd class="col-sm-9"> <%-products.preis%> E</dd>
-              
-                <dt class="col-sm-2">Straße</dt>
-                <dd class="col-sm-9"><%-products.straße%> </dd>
-              
-                <dt class="col-sm-2">state</dt>
-                <li class="list-inline-item"><%-products.state%></li>
-                <li class="list-inline-item"><%-products.zip%></li>
-                <br>
-                <dt class="col-sm-12 list-unstyled">Beschreibung</dt>
-                <hr>
-                <li class="col-sm-4 list-unstyled"><%-products.description%></li>
-              </dl>
+            <div class="col-md-4 col-lg-4 bg-dark text-white mt-5  pt-5 pr-5" >
+                <div class=" slider-content ">
+                    <div class="card  bg-dark text-white" >
+                        <div class="card-header mt-auto p-2 ">
+                            <h4><i class="fas fa-user mr-5 pl-3 header"></i><%-user.fname%> 
+                                <%-user.lname%></h4>
+                            
+                        </div  >
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item  bg-dark text-white"><i class="fab fa-creative-commons-sampling header mr-3"> </i><i class=" mr-3">Aktiv seit</i>  <span class="">  <%=new Date(user.date).toLocaleDateString('de-DE')%></span> </li>
+                          <li class="list-group-item  bg-dark text-white"><i class="far fa-envelope header mr-5"></i><%= user.email%></li>
+                          <li class="list-group-item  bg-dark text-white"> <i class="fas fa-phone-alt mr-5 header"> </i> <%= products[i].telefonnummer%> </li>
+                          
+                         <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="well well-sm">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </ul>
+                      </div>
+                      <!-- ///////// -->
+                      <div class="d-flex justify-content-center pt-3">
+                    <button type="button" class="btn btn-primary d-flex justify-content-center" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><span class="mt-auto pr-2"><i class="far fa-envelope bigicon"></i></span><h5 class="mt-auto pt-1">Nachricht Schreiben</h5></button>
+                    </div>
+                      <form action="/admin/peoduct" method="POST" >
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog ">
+                        <div class="modal-content">
+                          
+                          <div class="modal-header  bg-success">
+                              <h5 class="modal-title " id="exampleModalLabel">Contact the seller</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            
+                          </div>
+                          
+                          <div class="modal-body">
+                                <fieldset disabled>
+                                <div class="form-group mt-auto p-2 d-flex justify-content-center">
+                                    <span class=" "><i class="fas fa-passport bigicon"></i></span>
+                                    <div class="col-md-12">
+                                    <input type="text" id="disabledTextInput"  class="form-control" placeholder="<%=products[i].id%>">
+                                    </div>
+                                
+                                  </div>
+                                </fieldset>
+                                <div class="form-group mt-auto p-2 d-flex justify-content-center">
+                                        <span class=" "><i class="far fa-envelope bigicon"></i></span>
+                                    <div class="col-md-12">
+                                        <input id="email" name="email" type="text" placeholder="Email Address" class="form-control">
+                                    </div>
+                                </div>
+                                
+                              
+        
+                                <div class="form-group mt-auto p-2 d-flex justify-content-center">
+                                    <span class=""><i class="far fa-comment bigicon"></i></span>
+                                    <div class="col-md-12">
+                                        <textarea class="form-control" id="message" name="message" placeholder="Enter your massage for us here. We will get back to you within 2 business days." rows="7"></textarea>
+                                        
+                                    </div>
+                                </div>
+        
+                               
+                            
+                          </div>
+                          <div id="errorMessage" class="text-danger d-none">please fill the entries </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary btn-lg" id="sendmessageBtn">Submit</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   </form>
+                   
+                </div>
+           </div>
+    </div> 
+    
+    <div class="card  bg-dark text-white col-sm-8" >
+        <dl class="list-group list-group-flush  bg-dark text-white ">
+           
+            <dd class="list-group-item bg-dark"><i class="fas fa-dollar-sign  mr-4 header"></i><i class="mr-5" >Preis</i> <%-products[i].preis%> <i class="fas fa-euro-sign"></i></dd>
+          
+           
+            <dd class="list-group-item  bg-dark"><i class="fas fa-home mr-3 header"></i><i class="mr-5">Straße</i> <%-products[i].straße%> </dd>
+          
+            <dd class="list-group-item  bg-dark"><i class="fas fa-map-marked-alt mr-3 header"></i><i class="mr-5">state</i><i class="mr-3"><%-products[i].state%></i><%-products[i].zip%> </dd>
             
+           
+          
+            <dt class="list-group-item  bg-dark"><i class="fas fa-audio-description mr-3 header"></i> Beschreibung</dt>
+            
+            <div class="col-sm-12 col-md-12 d-flex w-100 justify-content-between list-group-item col-sm-8 bg-dark">
+                
+                <p class=" text-white"><%-products[i].description%></p>
+              </div>
+            <li class="col-sm-12 col-md-8 list-unstyled"></li>
+           
+          </dl>
         </div>
-        <%}%>
-    </section>
-    </div>
-<div class="container-fluid">
-  <div class="row content ">
-    <div class="col-sm-2 sidenav p-3 mb-2 bg-dark text-white  ">
-      
-      
-      
-
-      <div id="list-example" class="list-group ">
        
-        <h6>Der Name</h6>
-        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-1"><h6><%= sm.fname%> <%= sm.lname%> </h6></a>
-        <h6>email</h6>
-        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-2"><%= sm.email%></a>
-        <h6>Aktiv seit</h6>
-        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-3"><span class="badge badge-secondary"><%= sm.date%></span></a>
-        <h6>Einstellungen</h6>
-        <button type="button" class="btn btn-danger"><a class=" text-white" href="/admin/edit-data">  Daten geändert</a></button>
-      </div>
-     
-      
-    </div>
+</div>
+<%}%>
+           
+</section>
 
-   
-  </div>
 </div>
 
+<%- include('./partials/footer.ejs')-%>
+<script>
 
 
-</body>
-</html>
-<%- include('../partials/footer.ejs')-%>
+    let plasAttr=''
+                
+    $('.form-control').blur(function () { 
+                    if($(this).val()==''){
+                        $(this).css( 'border-bottom-color', 'salmon')
+                        $(this).next('div').fadeIn()
+                        
+                    }else{
+                        $(this).css( 'border-bottom-color', 'white')
+                        $(this).next('div').fadeOut()
+                        
+                    }
+                });
+    $('#sendmessageBtn').click(e => {
+        e.preventDefault()
+        const idSeller = document.querySelector('#disabledTextInput').placeholder
+        const  emailUser = document.querySelector('#email').value.trim()
+        const messageUser = document.querySelector('#message').value.trim()
+    
+    if (emailUser && messageUser ) {
+        $('#errorMessage').addClass('d-none')
+        const sentObj = {
+            idSeller,
+            emailUser,
+            messageUser
+        }
+      
+        fetch('/product',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sentObj)
+        }).then(response => {
+            if(response.status == 200) {
+                response.json().then(data => {
+                   // console.log(data)
+                   if (data === 1) {
+        document.querySelector('#email').value=''
+        document.querySelector('#message').value=''
+        $('#exampleModal').modal('hide')
+        setTimeout(() => {
+            alert('message  has been sent successfuly')
+        }, 100);
+        
+                   } else {
+                       
+                    alert('message  has NOT been sent')
+
+                   }
+                    
+                }).catch(error => {
+                    console.log(error);
+                   
+                })
+            }
+        }).catch(error => {
+            console.log(error)
+            
+        })
+    } else {
+        $('#errorMessage').removeClass('d-none')
+    }
+    })
+</script>

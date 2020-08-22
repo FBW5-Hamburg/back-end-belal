@@ -15,10 +15,7 @@ router.get('/',(req,res)=>{
     res.render('admin')
    
 })
-router.get('/index',(req,res)=>{
-    res.render('index')
-   
-})
+
 
 
 
@@ -67,12 +64,13 @@ router.post('/addProduct',(req, res) => {
 } else {
     res.json(2)
 }
-router.get('/logout', (req, res) => {
-    req.session.destroy()
-    res.redirect('/login')
-})
+// router.get('/logout', (req, res) => {
+//     req.session.destroy()
+//     res.redirect('/login')
+// })
     })
    router.get('/product', (req, res) => {
+    
     let sm=req.session.user
         dataModule.userproduct(sm._id).then(products => {
            
@@ -85,6 +83,7 @@ router.get('/logout', (req, res) => {
         
     })
     
+    
     router.get('/edit-data', (req, res) => {
         let sm=req.session.user
         dataModule.userproduct(sm._id).then(products => {
@@ -94,9 +93,9 @@ router.get('/logout', (req, res) => {
         })    
     })
     router.post('/edit-data', (req, res) => {
-        const {newfname,newlname,newemail,password,repassword,userId} = req.body
-       console.log(newfname,newlname,newemail,password,repassword,userId)
-       dataModule.updateProduct(newfname,newlname,newemail,password,userId,req.session.user._id).then(()=>{
+        const {newfname,newlname,newemail,userId} = req.body
+       console.log(newfname,newlname,newemail,userId)
+       dataModule.updateUser(newfname,newlname,newemail,userId,req.session.user._id).then(()=>{
    res.json(1)
    }).catch(error => {
        res.json(2)
@@ -149,5 +148,10 @@ router.post('/deleteproduct', (req, res) => {
         res.json(2)
     })
 })
+router.get('/logout', (req, res) => {
+    req.session.destroy()
+    res.redirect('/login')
+})
+
 
 module.exports=router
