@@ -1,5 +1,5 @@
 # kleinanzeigen Project
-![enter image description here](screenShot.png)
+![enter image description here](screenShot.PNG)
 
 this project is online platform to sell and buy products in differnt categories.
 after you register to our website you can login and sell or buy products 
