@@ -1,6 +1,5 @@
 const express =require('express')
 const router =express.Router()
-
 const dataModule = require('../modulesData/mongoosData')
   router.use((req,res,next) => {
     if ( req.session.user ) {
@@ -9,26 +8,17 @@ const dataModule = require('../modulesData/mongoosData')
         res.redirect('/login')
     }
     })
-
-
 router.get('/',(req,res)=>{
     res.render('admin')
    
 })
-
-
-
-
 //////////////Add Product ////////////
 router.get('/addProduct',(req,res)=>{
-    res.render('addProduct')
-   
+    res.render('addProduct') 
 })
 router.post('/addProduct',(req, res) => {
-    console.log(req.body);
    console.log(Object.keys( req.files))
      if (req.files) {
-    // console.log(Object.keys( req.files));
      const title =req.body.title
      const productImgs =req.body.productImgs
      const description =req.body.description
@@ -44,13 +34,9 @@ router.post('/addProduct',(req, res) => {
         for(const key in req.files){
             if (req.files[key].mimetype !='application/pdf') {
                 imgs.push(req.files[key])
-               // console.log(req.files[key]);
-                
+                 
             }
-        }
-        
-      //  console.log(imgs);
-         
+        }    
      dataModule.addProduct(title,description,preis,imgs,name,telefonnummer,straße,state,zip,req.session.user._id, Kategorie ).then(() => {
          res.json(1)
      }).catch(error =>{
@@ -64,10 +50,7 @@ router.post('/addProduct',(req, res) => {
 } else {
     res.json(2)
 }
-// router.get('/logout', (req, res) => {
-//     req.session.destroy()
-//     res.redirect('/login')
-// })
+
     })
    router.get('/product', (req, res) => {
     
@@ -78,9 +61,7 @@ router.post('/addProduct',(req, res) => {
           
         }).catch(error=>{
             res.send('404,Product could not be found')
-        })
-       
-        
+        }) 
     })
     
     
@@ -98,12 +79,11 @@ router.post('/addProduct',(req, res) => {
        dataModule.updateUser(newfname,newlname,newemail,userId,req.session.user._id).then(()=>{
    res.json(1)
    }).catch(error => {
-       res.json(2)
+    console.log(error);
+    res.json(2)
   })    
-})
-
-    
-    router.get('/product/:id', (req, res) => {
+})  
+router.get('/product/:id', (req, res) => {
         const productid = req.params.id
         dataModule.getProduct(productid).then(product => {
             res.render('editProduct', {product:product.product})
@@ -127,12 +107,12 @@ router.post('/addProduct',(req, res) => {
               }
          }
     } 
-  // console.log(newImgs);
+
          let oldImgsUrlsArr =JSON.parse(oldImgsUrls)
          oldImgsUrlsArr =oldImgsUrlsArr.map(element => {
              return element.substr(element.indexOf('/uplodeFiles/')) 
          });
-         //console.log(oldImgsUrlsArr);
+         
          dataModule.updateProduct(productid,newTitle, oldImgsUrlsArr,newdescription,newpreis,newname,newtelefonnummer,newstraße,newstate,newzip,req.session.user._id,newImgs).then(()=>{
      res.json(1)
      }).catch(error => {

@@ -209,7 +209,7 @@ function addProduct(title, description, preis,  productImgs,name,telefonnummer,s
                         userid: userid
                     })
                     newProduct.save().then(response => {
-                        console.log(response);
+                        //console.log(response);
 
                               resolve()
 
@@ -262,25 +262,21 @@ function userproduct(userid) {
     })
 })
 }
-function getAllProducts() {
+function getAllProducts(limit,skip) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
-
-            Product.find().then(prod =>{
-            //     prod.forEach(pro=>{
-            //         pro['id']=pro['_id']
-              
-            //   })
-
-           
-            resolve( prod)
-
-          }).catch(error => {
-
-            reject(error)
-        })
-
-
+          
+          
+                Product.find({}).sort('-id')
+                .limit(limit)
+                .skip(skip).then(prod =>{
+                   
+                    resolve( prod)
+        
+                  }).catch(error => {
+        
+                    reject(error)
+                })
     }).catch(error => {
 
         reject(error)
@@ -325,9 +321,6 @@ function getProduct(id) {
 
             if (user) {
                 user.id=user._id
-
-          
-                // resolve(product,user)
                 resolve({product: product, user:user})
           //console.log(user);
             } else {
@@ -348,14 +341,10 @@ function getProduct(id) {
 
             reject(error)
         })
-          
-
           }).catch(error => {
 
             reject(error)
         })
-
-
     })
 
 }
@@ -378,8 +367,6 @@ function getuser(id) {
 
             reject(error)
         })
-        
-
     }).catch(error => {
 
         reject(error)
@@ -451,8 +438,6 @@ function search(term) {
             const regexp = new RegExp('^' + term + '\w|' + term + '|\w' +term + '\w' + '|\w' + term + '$')
             Product.find({ "title": regexp }).then(results =>{
                 
-             // console.log(results);
-
              Product.find({ "description": regexp }).then(results1 =>{
                 
                 // console.log(results);
@@ -519,30 +504,23 @@ function deleteProduct(productid, userid) {
   }
 
   function updateUser(newfname,newlname,newemail,userId ) {
+      
         return new Promise((resolve, reject) => {
-            connect().then(()=> {
-                
-         Users.updateOne({_id: userId},{ $set:{
-            fname:newfname,
-            lname:newlname, 
-            email:newemail,
-                $inc:{__v:1}
-         }
-           
-          }).then(user=>{
-
-           
-        resolve(user)
-          }).catch(error => {
-            reject(3)
-        })
-         
-        
-     
-        }).catch(error => {
-            reject(4)
-        })
-    
+            
+                        Users.updateOne({_id: userId},{ $set:{
+                            fname:newfname,
+                            lname:newlname, 
+                            email:newemail,
+                            _id:userId,
+                                $inc:{__v:1}
+                         }
+                           
+                          }).then(user=>{  
+                        resolve()
+    }).catch(error => {
+        //console.log(error);
+        reject(2)
+    }) 
 })
   }
 ////////////
@@ -579,13 +557,13 @@ function checkEmail(email) {
     })
 }
 function checkPassword(password,userToken) {
-    // your code
+  
     return new Promise((resolve, reject) => {
         connect().then(()=> {
             Users.find({
                 passwordToken:userToken
             }).then(user => {
-               // console.log(resul);
+              
                 if (user) {
 
                     user.password = passwordHash.generate(password)

@@ -4,10 +4,10 @@
 <section class="product-sec pt-1">
     
 <div class="container bg-dark text-white p-3">
-    <div class="row   ">
+    <div class="row">
         
            
-            <div class="col-md-8 col-lg-8 bg-dark text-white  slider-sec ">
+            <div class="col-md-7 col-lg-8 bg-dark text-white  slider-sec ">
                 <h3 class="  bg-dark text-white  d-flex justify-content-center"><%=product.title%></h3>
                 <!-- main slider carousel -->
                 <div id="myCarousel" class="carousel slide col-sm-12 col-md-12">
@@ -36,16 +36,16 @@
                 
                 <!--/main slider carousel-->
             </div>
-            <div class="col-md-4 col-lg-4 bg-dark text-white mt-5  pt-5 pr-5" >
-                <div class=" slider-content ">
+            <div class=" col-md-5 col-lg-4 bg-dark text-white mt-5  pt-5 pr-5" >
+                <div class=" slider-content fg">
                     <div class="card  bg-dark text-white" >
                         <div class="card-header mt-auto p-2 ">
-                            <h4><i class="fas fa-user mr-5 pl-3 header"></i><%-user.fname%> <%-user.lname%></h4>
+                            <h4><i class="fas fa-user mr-5 pl-3 header"></i><%-users.fname%> <%-users.lname%></h4>
                             
                         </div  >
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item  bg-dark text-white"><i class="fab fa-creative-commons-sampling header mr-3"> </i><i class=" mr-3">Aktiv seit</i>  <span class="">  <%=new Date(user.date).toLocaleDateString('de-DE')%></span> </li>
-                          <li class="list-group-item  bg-dark text-white"><i class="far fa-envelope header mr-5"></i><%= user.email%></li>
+                          <li class="list-group-item  bg-dark text-white"><i class="fab fa-creative-commons-sampling header mr-3"> </i><i class=" mr-3">Aktiv seit</i>  <span class="">  <%=new Date(users.date).toLocaleDateString('de-DE')%></span> </li>
+                          <li class="list-group-item  bg-dark text-white"><i class="far fa-envelope header mr-5"></i><%= users.email%></li>
                           <li class="list-group-item  bg-dark text-white"> <i class="fas fa-phone-alt mr-5 header"> </i> <%= product.telefonnummer%> </li>
                           <li class="list-group-item  bg-dark text-white ">
                          <a href="/allProductUser/<%-product.userid%>"><i class="fas fa-globe  mr-5 header"></i> Anzeigen online</a></li>
@@ -65,7 +65,7 @@
                     <button type="button" class="btn btn-primary d-flex justify-content-center" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><span class="mt-auto pr-2"><i class="far fa-envelope bigicon"></i></span><h5 class="mt-auto pt-1">Nachricht Schreiben</h5></button>
                     </div>
                       <form action="/admin/peoduct" method="POST" >
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade nbn" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog ">
                         <div class="modal-content">
                           

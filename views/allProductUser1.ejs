@@ -1,0 +1,122 @@
+<%- include('./partials/header.ejs')-%>
+<%- include('./partials/navbar.ejs')-%>
+
+
+  
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 100%}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <%for (let i = 0; i < products.length; i++){%>
+    <section class="product-sec">
+        <div class="container ">
+          
+            <div class="row bg-dark text-white mt-2 pt-3">
+                <h1 class="col-md-12  bg-dark text-white p-1"><%=products[i].title%></h1>
+                <div class="col-md-12 slider-sec ">
+                    <!-- main slider carousel -->
+                    <div id="myCarousel" class="carousel slide">
+                        <!-- main slider carousel items -->
+                        <div class="col-md-12 carousel-inner">
+                            <%for (let x = 0; x < products[i].imgs.length; x++){%>
+                            <div class="<%= x == 0 ? 'active' : '' %> item carousel-item" data-slide-number="<%=x%>">
+                                <img src="<%=products[i].imgs[x]%>" class="img-fluid img1">
+                            </div>
+                            <%}%>
+                            
+                        </div>
+                        <!-- main slider carousel nav controls -->
+                        <ul class="carousel-indicators list-inline">
+                            <%for (let x = 0; x < products[i].imgs.length; x++){%>
+                            <li class="list-inline-item <%= x == 0 ? 'active' : '' %>">
+                                <a id="carousel-selector-0" class="<%= x == 0 ? 'selected' : '' %>" data-slide-to="<%=x%>" data-target="#myCarousel">
+                                <img src="<%=products[i].imgs[x]%>" class="img-fluid">
+                            </a>
+                            </li>
+                            <%}%>
+                            
+                        </ul>
+                       
+                    </div>
+                    
+                    <!--/main slider carousel-->
+                </div>
+                
+            </div>
+            <%for (let i = 0; i < products.length; i++){%>
+            <dl class="row bg-dark text-white p-2">
+                <dt class="col-sm-2">Preis</dt>
+                <dd class="col-sm-9"> <%-products[i].preis%> E</dd>
+              
+                <dt class="col-sm-2">Straße</dt>
+                <dd class="col-sm-9"><%-products[i].straße%> </dd>
+              
+                <dt class="col-sm-2">state</dt>
+                <li class="list-inline-item"><%-products[i].state%></li>
+                <li class="list-inline-item"><%-products.zip%></li>
+                <br>
+                <dt class="col-sm-12 list-unstyled">Beschreibung</dt>
+                <hr>
+                <li class="col-sm-4 list-unstyled"><%-products[i].description%></li>
+              </dl>
+              <%}%>
+        </div>
+        <%}%>
+    </section>
+    </div>
+<div class="container-fluid">
+  <div class="row content ">
+    <div class="col-sm-2 sidenav p-3 mb-2 bg-dark text-white  ">
+      
+      
+      
+
+      <div id="list-example" class="list-group ">
+       
+        <h6>Der Name</h6>
+        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-1"><h6><%= sm.fname%> <%= sm.lname%> </h6></a>
+        <h6>email</h6>
+        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-2"><%= sm.email%></a>
+        <h6>Aktiv seit</h6>
+        <a class="list-group-item list-group-item-action p-3 mb-3 bg-dark text-white" href="#list-item-3"><span class="badge badge-secondary"><%= sm.date%></span></a>
+        <h6>Einstellungen</h6>
+        <button type="button" class="btn btn-danger"><a class=" text-white" href="/admin/edit-data">  Daten geändert</a></button>
+      </div>
+     
+      
+    </div>
+
+   
+  </div>
+</div>
+
+
+
+</body>
+</html>
+<%- include('./partials/footer.ejs')-%>

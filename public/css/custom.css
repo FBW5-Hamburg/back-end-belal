@@ -173,7 +173,7 @@ z-index: 5;
 
 .register-left {
     text-align: center;
-    color: rgb(62, 13, 141);
+    color:  #545455;
     margin-top: 0%;
 }
 
@@ -212,7 +212,7 @@ z-index: 5;
     font-weight: lighter;
     padding: 5%;
     margin-top: -7%;
-    color: rgb(39, 40, 144);
+    color:  #545455;
 }
 
 
@@ -231,6 +231,7 @@ z-index: 5;
         text-align: center;
     display: block;
         margin: 0px 0px;
+      
 }
 .register .nav-tabs .nav-link {
       padding: 5px ;
@@ -248,15 +249,15 @@ z-index: 5;
 }
 
 .register .nav-tabs .nav-link.active {
-    color:  #1143a6;
-    border: 1px solid  #1143a6;
+   
+   
     border-top-left-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
 }
 
 .register-heading {
     text-align: center;
-    color:  #1143a6;
+    color:  #545455;
     margin: 10px 20px 20px 20px;
 }
 
@@ -347,7 +348,7 @@ z-index: 5;
     margin: 0px;
     padding: 0px;
 }
-@media only screen and (max-width:990px){.product-grid5{margin-bottom:30px}
+@media only screen and (max-width:990px){.product-grid5{margin-bottom:50px}
 }
 /* ////////carousel */
 .container h1{
@@ -423,12 +424,57 @@ z-index: 5;
        }
       
     }
+    @media only screen and (max-width: 987px) {
+        #myCarousel .carousel-inner{
+            width: 85%;
+            padding-left: 1px;
+            margin-left: -15px;
+        }
+        .product-sec #myCarousel .carousel-indicators > li{
+            margin-left: 80px;
+        }
+        .fg{
+            width: 100%;
+            margin-left: 20px;
+        }
+        .product-sec #myCarousel .carousel-indicators > li{
+            margin-left: 110px;
+        }
+    }
+    /* //////// */
+    @media only screen and (max-width: 770px) {
+        .product-sec #myCarousel .carousel-indicators > li{
+            margin-left: 90px;
+        }
+         }
+    /* /////// */
     @media only screen and (max-width: 510px) {
         .product-sec #myCarousel .carousel-indicators {
            right: 20px;  
         
        }
-      
+       .product-grid5{
+           height: 100vh;
+       }
+       .product-image5{
+        height: 80vh;
+       }
+       container-fluid{
+         margin: 0;
+         overflow: hidden;
+         width: 100%;
+      }
+      .product-grid5 .product-image5 img{
+          height: 350px;
+      }
+      #myCarousel .carousel-inner{
+          width: 80%;
+          padding-left: 1px;
+          margin-left: -15px;
+      }
+      .product-sec #myCarousel .carousel-indicators > li{
+          margin-left: 20px;
+      }
     }
   
 /* //// */
@@ -488,38 +534,7 @@ h6 {
 }
 
 
-.topnav {
-    font-size: 16px;
-    border-bottom: 1px outset rgba(192, 192, 192, 0.5);
-    background: rgba(192, 192, 192, 0.9);
-    box-shadow: 0px 1px rgba(0, 0, 0, 0.3);
-}
-.topnav ul.navbar-nav li a {
-background: rgba(28, 28, 28, 0.1);
-color: #000;
-}
-.topnav ul.navbar-nav li a:hover,
-.topnav ul.navbar-nav li a:focus
- {
-background: rgba(255, 255, 255, 0.5);
-color: #000;
-}
 
-.topnav .navbar-brand {
-  background: rgba(28, 28, 28, 0.0);
-  color: #000;
-}
-
-.topnav .navbar-brand:hover,
-.topnav .navbar-brand:focus {
-  background: rgba(255, 255, 255, 0.5);
-  color: #000;
-}
-
-.lead {
-    font-size: 18px;
-    font-weight: 380px;
-}
 /*top background*/
 .intro-header { 
     padding-top: 70px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
@@ -555,7 +570,7 @@ color: #000;
 /*small header*/
 .intro-message > h3 {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
-    color: rgba(64, 50, 228, 0.7);
+    color: rgba(230, 230, 231, 0.7);
 }
 
 @media(max-width:767px) {
@@ -592,13 +607,13 @@ hr.intro-divider {
 /*section 2*/
 .content-section-a {
     padding: 50px 0;
-    background: url('https://images.unsplash.com/photo-1484807352052-23338990c6c6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80') no-repeat center center fixed;
+    background: url('https://images.unsplash.com/photo-1484807352052-23338990c6c6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=80') no-repeat center center fixed;
     background-size: cover;
     height: 550px;
 }
 .bg-overlay2 {
   margin-top: -50px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(53, 52, 52, 0.459);
   height: 450px;
 }
   /*self-taught*/
@@ -619,7 +634,7 @@ hr.intro-divider {
 }
 
 .container .link:hover {
-  color: rgb(0,0,128);
+  color: rgb(229, 229, 233);
   font-weight: bold;
   font-size: 22.5px;
 }
@@ -651,7 +666,7 @@ h2.section-heading {
 
 /* Portfolio section*/
 section {
-  color: rgb(17, 33, 105);
+  color: rgb(214, 215, 218);
   font-weight: bold;
   
 }
@@ -660,11 +675,13 @@ section {
    color: #000;
 }
 .smm{
-    color: rgb(17, 33, 105);
+    color: rgb(212, 213, 214);
     font-weight: bold;
    
 }
-
+.smm:hover{
+    color: rgb(212, 213, 214);
+}
  #below-section {
   color: #000;
 }
@@ -683,7 +700,7 @@ section {
 
 .banner {
     padding: 100px 0px;
-    background: url('https://images.unsplash.com/photo-1570126688035-1e6adbd61053?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60') no-repeat center center fixed;
+    background: url('https://images.unsplash.com/photo-1497091071254-cc9b2ba7c48a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80') no-repeat center center fixed;
     background-size: cover;
     height: 755px;
   
@@ -693,7 +710,7 @@ section {
 .bg-overlay4 {
   margin-top: -100px;
   padding: 100px 0;
-  background: rgba(255,255,255, 0.3);
+  background: rgba(15, 15, 15, 0.424);
   height: 650px;
 }
 
@@ -746,13 +763,46 @@ h2.connect {
     margin: 0;
     padding: 0;
 }
-.bg-dark{
+.fotrss{
+    color: rgba(209, 206, 206, 0.609);
+}
+/* .bg-dark{
     opacity: 0.9;
     
-}
+} */
 p.copyright {
     margin-top: 52px;
 } 
+.npn{
+    z-index: 999;
+}
 /* .container-fluid{
     height: 100vw;
 } */
+@media(max-width:765px) {
+   .lmm{
+       display: none;
+   }
+   .fmm{
+       position: absolute;
+       bottom: -14%;
+   }
+   .content-section{
+    height: 750px;
+   }
+   .banner{
+    height: 850px;
+   }
+   .bg-overlay4 {
+    margin-top: -100px;
+    padding: 100px 0;
+    background: rgba(15, 15, 15, 0.424);
+    height: 750px;
+  }
+
+}
+.my{
+    text-shadow: 3px 1px 2px #000;
+    font-size: 2em;
+    color: rgba(255, 255, 255, 0.7);
+}

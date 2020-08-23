@@ -5,7 +5,7 @@
 
     <div class="row  ">
         
-        <div class="col-sm-12 col-md-3 col-lg-2  p-2  pl-3 bg-dark text-white ">
+        <div class="col-sm-12  col-md-3 col-lg-2  p-2  pl-3 bg-dark text-white katigr">
             <div id="list-example" class="list-group ">
                 <a class="list-group-item list-group-item-action pt-3 mb-3 bg-dark text-white" href="/"> All Kategorien</a>
 
@@ -15,7 +15,7 @@
 
                <%})  %>
                <% const distinctKategorie = [...new Set(allKat)]  %>
-               <% console.log(distinctKategorie)%>
+              
                 <%for (let i = 0; i < distinctKategorie.length; i++){%>
                     
                 <a class="list-group-item list-group-item-action  p-3 bg-dark text-white" href="/katergorie/<%= distinctKategorie[i]%>"><%= distinctKategorie[i]%></a>
@@ -27,7 +27,7 @@
         <div class="row  p-1 col-sm-12 col-md-9 col-lg-10 pl-1 ">
            
         <div class=" p-1 bg-dark p-3 ml-3 pl-2  font-weight-bold text-white pargraf">   
-            <h2 class="d-flex justify-content-center">Willkommen bei Kleinanzeigen </h2>  Wir sind ein kostenloser Service, um Ihre Anzeigen zu vermarkten oder nach Ihren Interessen zu suchen. Sie können sich einfach auf der Website  <a class="" href="/register">Registrieren</a> </div>
+            <h2 class="d-flex justify-content-center my">Willkommen bei Kleinanzeigen </h2>  Wir sind ein kostenloser Service, um Ihre Anzeigen zu vermarkten oder nach Ihren Interessen zu suchen. Sie können sich einfach auf der Website  <a class="" href="/register">Registrieren</a> </div>
            <%for (let i = 0; i < allproduct.length; i++){%>
         <div class="col-sm-12 col-md-6 col-lg-3 p-4 ">
             <div class="product-grid5 list-group">
@@ -56,8 +56,24 @@
             </div>
         </div>
         <%}%>
+        
         </div>
-    </div>    
+    </div>  
+    <div class="row">
+        <div class="col-12 mt-4">
+         <nav aria-label="...">
+
+             <ul class="pagination pagination-lg  justify-content-center">
+                 <%for (let i = 0; i < allproduct.length; i++){%>
+                 
+               <li class="page-item"><a class="page-link" href="/home/<%= i%>"><%= i%></a></li>
+               <%}%>
+             </ul>
+             
+           </nav>
+        </div>
+
+     </div>  
 </div>                                 
 
 <%- include('./partials/footer.ejs')-%>

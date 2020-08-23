@@ -32,26 +32,64 @@ app.use(fileupload({
     limits: { fileSize: 50 * 1024 * 1024 }
 }))
 
-app.use(function(req, res, next) {
-    res.locals.user = req.session.user;
-    next();
-  });
+  app.use(function(req, res, next) {
+      res.locals.user = req.session.user;
+      next();
+    });
 app.use('/admin',adminRouter)
 //app.use(flash());
 
- app.get('/',(req,res)=>{
+  app.get('/',(req,res)=>{
+    var limit =8
+         var skip = 8*('home'-1)
+      db.getAllProducts(limit,skip).then(allproduct => {
+       
+          res.render('home', {allproduct})
+      }).catch(error=>{
+       
+         res.send('404,Product could not be found')
+     })
+  })
+  app.get('/home/:page?',(req,res)=>{
+     let page =1
+     if (req.params.page) {
+         page=parseInt(req.params.page)   
+     }
+     if (req.params.page==0) {
+         page=1  
+     }
+     var limit =8
+     var skip = 7 * (page-1)
     
-     db.getAllProducts().then(allproduct => {
+     
+      db.getAllProducts(limit,skip).then(allproduct => {
        
-         res.render('home', {allproduct})
-     }).catch(error=>{
-       
-        res.send('404,Product could not be found')
-    })
- })
+          res.render('home', {allproduct})
+      }).catch(error=>{
+      
+         res.send('404,Product could not be found')
+     })
+  })
  app.get('/about',(req,res)=>{
         res.render('about')
     
+})
+app.post('/about',(req,res)=>{
+    console.log(req.body.email);
+    const name = req.body.name
+    const email = req.body.email
+    const subject = req.body.subject
+    const message = req.body.message
+    console.log(name,email,subject,message);
+    
+        emailSender.getEmailAbout(email,'name:'+ name+'\n'+'email:'+email+'\n' + message ,subject , (ok) => {
+            if(ok){
+                res.render('about') 
+            } else{
+                
+                res.send('error')
+            }
+        });
 })
  app.get('/katergorie/:kategorie',(req,res)=>{
        db.getKategorien(req.params.kategorie).then(kategorie => {
@@ -60,17 +98,18 @@ app.use('/admin',adminRouter)
        }).catch(error=>{
         res.send('404,Product could not be found')
     })
-    
-   
 })
 app.get('/product-single/:title/:id', (req, res) => {
     db.getProduct(req.params.id).then((product) => {
-        let checLogin =false
-        if (req.session.user) {
-            checLogin =true
-        }
-
-        res.render('product-single', {product:product.product,checLogin,user:product.user})
+        res.render('product-single', {product:product.product,users:product.user})
+       // console.log();
+    }).catch(error=>{
+        res.send('404,Product could not be found')
+    }) 
+})
+app.get('/home/product-single/:title/:id', (req, res) => {
+    db.getProduct(req.params.id).then((product) => {
+        res.render('product-single', {product:product.product,users:product.user})
        // console.log();
     }).catch(error=>{
         res.send('404,Product could not be found')
@@ -80,13 +119,12 @@ app.get('/product-single/:title/:id', (req, res) => {
 app.get('/katergorie/product-single/:title/:id', (req, res) => {
     
      db.getProduct(req.params.id).then((product) => {
-       // console.log(product.user);
          let checLogin =false
          if (req.session.user) {
              checLogin =true
          }
  
-         res.render('product-single', {product:product.product,checLogin,user:product.user})
+         res.render('product-single', {product:product.product,checLogin,users:product.user})
         // console.log();
      }).catch(error=>{
          res.send('404,Product could not be found')
@@ -223,16 +261,12 @@ app.post('/changepassword', (req, res) => {
    
         db.getuser(sm.id).then(product => {
            
-            console.log(sm.id);
-             res.render('allProductUser', {products:product.prod,user:product.user})
+            //console.log(sm.id);
+             res.render('allProductUser', {products:product.prod,us:product.user})
             // console.log(products);
          }).catch(error=>{
              res.send('404,Product could not be found')
          })
-       
-        
-   
-    
  })
  app.post('/product', (req, res) => {
     console.log(req.body);
@@ -269,8 +303,6 @@ app.get('/search', (req, res) => {
         res.send('404,Product could not be found')
     })
     })
-            
-
   app.listen(port,()=>{
     console.log('it is working on port 3000')
 })

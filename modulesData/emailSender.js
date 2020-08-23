@@ -52,9 +52,27 @@ return new Promise((resolve, reject) => {
         })
   
     }
-  
+  function getEmailAbout(email,message,subject,callback) {
+    const mailOption ={
+        from: email,
+        to:' belalsukari@gmail.com',
+        subject: subject,
+        text:   message
+    }
+    transporter.sendMail(mailOption, function (error, info) {
+        if(error){
+            console.log(error);
+            callback(false);
+            
+        } else {
+            console.log(info.response);
+            callback(true);
+        }
+      })
+  }
    
   module.exports = { 
       sendEmail,
-      getEmail
+      getEmail,
+      getEmailAbout
  }
