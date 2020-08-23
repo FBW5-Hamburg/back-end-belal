@@ -1,21 +1,11 @@
-/* footer */
- /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+
  .row.content {height: 800px}
     
- /* Set gray background color and 100% height */
+
  .sidenav {
    background-color: #a70f4e;
    height: 100vh;
  }
- 
- /* Set black background color, white text and some padding */
- /* footer {
-   background-color: rgb(175, 14, 14);
-   color: rgb(180, 17, 17);
-   padding: 15px;
-   margin-top: 10px;
- } */
- 
  /* On small screens, set height to 'auto' for sidenav and grid */
  @media screen and (max-width: 767px) {
    .sidenav {
@@ -30,7 +20,7 @@
     display: block;
 }
 body{
-    /* background: -webkit-linear-gradient(left,  #0e3585, #02b6fd); */
+   
     background: url('https://images.unsplash.com/photo-1525268771113-32d9e9021a97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60') no-repeat center center  fixed;
     background-size: cover;
 }
@@ -314,9 +304,7 @@ z-index: 5;
 .product-grid5{
     font-family:Poppins,sans-serif;
     position:relative;
-    position:relative;
     background-color: rgba(65, 65, 65, 0.911);
-    
     padding: 3px;
     height: 60vh;
 }
@@ -412,11 +400,7 @@ z-index: 5;
         float: left;
         margin: 0;
          }
-    /* .product-sec .slider-sec {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 750px;
-    flex: 0 0 700px;
-    max-width: 700px; }   */
+    
     @media only screen and (max-width: 992px) {
         .product-sec #myCarousel .carousel-indicators {
            right: 80px;  
@@ -446,6 +430,13 @@ z-index: 5;
         .product-sec #myCarousel .carousel-indicators > li{
             margin-left: 90px;
         }
+        .product-grid5{
+            height: 40vh;
+           width: 100%;
+        }
+        .product-image5{
+            height: 25vh;
+           }
          }
     /* /////// */
     @media only screen and (max-width: 510px) {
@@ -454,10 +445,11 @@ z-index: 5;
         
        }
        .product-grid5{
-           height: 100vh;
+           height: 80vh;
+          width: 100%;
        }
        .product-image5{
-        height: 80vh;
+        height: 60vh;
        }
        container-fluid{
          margin: 0;
@@ -473,7 +465,7 @@ z-index: 5;
           margin-left: -15px;
       }
       .product-sec #myCarousel .carousel-indicators > li{
-          margin-left: 20px;
+          margin-left: 30px;
       }
     }
   
